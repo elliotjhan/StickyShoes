@@ -29,7 +29,7 @@ const ProductListItem  = (props) => {
         </div>
         <div className="productInfo card-body">
           <div className="font-weight-bold productName">{product.name}</div>
-          {/* <div className="productPrice">${numberWithCommas(product.price)}</div> */}
+          <div className="productPrice">${product.price}</div>
           <Link to={'/catalog/details'}>
             <button className="btn btn-info mt-3 moreInfoButton" onClick={() => setViewCallback()}>More Info</button>
           </Link>
