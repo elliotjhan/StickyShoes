@@ -1,8 +1,9 @@
 import { React, useState } from 'react';
 import { Button, Modal, ModalHeader, ModalBody, ModalFooter } from 'reactstrap';
-import './landing-page.css';
+import './../styles/landing-page.css';
+import { Link } from 'react-router-dom'; 
 
-const LandingPage = (props) => {
+const LandingPage = () => {
   const [modalIsOpen, setModalIsOpen] = useState(false);
 
   const toggleModal = () => {
@@ -40,7 +41,9 @@ const LandingPage = (props) => {
           Disclaimer: This is not a real e-commerce site and is for demonstration purposes only.
         </ModalBody>
         <ModalFooter>
-          <Button onClick={() => props.setView('catalog')} color="primary">Agree</Button>
+          <Link to='catalog'>
+            <Button color="primary">Agree</Button>
+          </Link>
         </ModalFooter>
       </Modal>
     </div>

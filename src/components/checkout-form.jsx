@@ -1,42 +1,41 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { Button, Modal, ModalHeader, ModalBody, ModalFooter } from 'reactstrap';
+import { Link, Navigate } from 'react-router-dom'; 
 
-class CheckoutForm extends React.Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      name: null,
-      creditCard: null,
-      shippingAddress: null,
-      modalIsOpen: false
-    };
-    this.handleInput = this.handleInput.bind(this);
-    this.handleDeleteCartUponCompletingCheckout = this.handleDeleteCartUponCompletingCheckout.bind(this);
-    this.toggleModal = this.toggleModal.bind(this);
-  }
+const CheckoutForm = (props) => {
+  // const [name, setname] = useState(null);
+  // const [creditCard, setcreditCard] = useState(null);
+  // const [shippingAddress, setshippingAddress] = useState(null);
+  const [modalIsOpen, setmodalIsOpen] = useState(false);
+  const [info, setInfo] = useState({
+    name: null,
+    creditCard: null,
+    shippingAddress: null
+  })
 
-  numberWithCommas(number) {
+  const numberWithCommas = (number) => {
     let newNumber = (parseFloat(number) / 100).toFixed(2);
     return newNumber.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',');
   }
 
-  getCartTotal() {
+  const getCartTotal = () => {
     let cartTotal = null;
-    this.props.cart.forEach(element => {
+    props.cartData.forEach(element => {
       cartTotal += parseFloat(element.price); // using the array forEach method to get the total amount of all prices
     });
-    return this.numberWithCommas(cartTotal);
+    return numberWithCommas(cartTotal);
   }
 
-  handleInput(event) {
+  const handleInput = (event) => {
     let value = event.target.value; // this updates state as the user types in their input through onChange
     let name = event.target.name;
-    this.setState({
-      [name]: value
-    });
+    // this.setState({
+    //   [name]: value
+    // });
+    setInfo(info[name] = value);
   }
 
-  handleSetView() {
+  const handleSetView = () => {
     let setView = this.props.setView;
     let catalog = 'catalog';
     let params = '{}';
@@ -44,71 +43,63 @@ class CheckoutForm extends React.Component {
     this.props.getCartItems();
   }
 
-  handleDeleteCartUponCompletingCheckout() {
-    this.toggleModal();
-    let deleteEntireCart = this.props.deleteEntireCart;
-    let cartId = this.props.cart[0].cartID;
+  const handleDeleteCartUponCompletingCheckout = () => {
+    setmodalIsOpen(!modalIsOpen)
+    let deleteEntireCart = props.deleteEntireCart;
+    let cartId = props.cart[0].cartID;
     deleteEntireCart(cartId);
-    this.handleSetView();
-    
+    <Navigate to="/catalog" />
   }
 
-  toggleModal() {
-    this.setState({
-      modalIsOpen: !this.state.modalIsOpen
-    });
-  }
-
-  render() {
     return (
       <div className="container mt-3 checkout">
         <div className="row">
           <div className="col col-sm-12">
             <div className="display-4 checkoutTitle">Checkout</div>
-                        Order Total: ${this.getCartTotal()}
+              Order Total: ${this.getCartTotal()}
           </div>
         </div>
         <br/>
         <br/>
         <div className="row">
           <div className="col">
-                        Name <br/>
-            <input className="form-control" name="name" type="text" onChange={this.handleInput}/>
+            Name <br/>
+            <input className="form-control" name="name" type="text" onChange={() => handleInput()}/>
           </div>
         </div> <br/>
         <div className="row">
           <div className="col">
-                        Credit Card <br/>
-            <input className="form-control" name="creditCard" type="text" onChange={this.handleInput}/>
+            Credit Card <br/>
+            <input className="form-control" name="creditCard" type="text" onChange={() => handleInput()}/>
           </div>
         </div> <br/>
         <div className="row">
           <div className="col">
-                        Shipping Address <br/>
-            <textarea rows="4" className="form-control" name="shippingAddress" type="text" onChange={this.handleInput}/>
+            Shipping Address <br/>
+            <textarea rows="4" className="form-control" name="shippingAddress" type="text" onChange={() => handleInput()}/>
           </div>
         </div>
         <div className="row mt-2">
-          <div onClick={this.handleSetView.bind(this)} className="col cursor text-secondary">
-                        &lt;Continue Shopping
-          </div>
+          <Link to="/catalog">
+            <div className="col cursor text-secondary">
+              &lt;Continue Shopping
+            </div>
+          </Link>
           <div className="col text-right">
-            <button className="btn btn-primary" onClick={this.toggleModal}>Place Order</button>
+            <button className="btn btn-primary" onClick={() => setmodalIsOpen(!modalIsOpen)}>Place Order</button>
           </div>
         </div>
 
-        <Modal isOpen={this.state.modalIsOpen}>
+        <Modal isOpen={modalIsOpen}>
             <ModalHeader>
               Order Has Been Submitted!
             </ModalHeader>
             <ModalFooter>
-              <Button onClick={this.handleDeleteCartUponCompletingCheckout} color="primary">Back To Catalog</Button>
+              <Button onClick={() => handleDeleteCartUponCompletingCheckout()} color="primary">Back To Catalog</Button>
             </ModalFooter>
         </Modal>
-
       </div>
     );
-  }
 }
 
 export default CheckoutForm;

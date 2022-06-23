@@ -6,31 +6,36 @@ import CartSummary from './cart-summary';
 import CheckoutForm from './checkout-form';
 import LandingPage from './landing-page';
 import OrderConfirmation from './order-confirmation';
+import {
+  Routes,
+  Route,
+  Navigate
+} from "react-router-dom";
 
 const App = () => {
   const [products, setProducts] = useState([]);
-  const [view, setView] = useState('landingPage');
+  const [currentItem, setCurrentItem] = useState({});
   const [cartData, setCartData] = useState([]);
   const [cartLength, setCartLength] = useState(0);
   const [orderSummary, setOrderSummary] = useState([]);
   const [creditCard, setCreditCard] = useState(null);
   const [shippingAddress, setShippingAddress] = useState(null);
-  const [cartError, setCartError] = useState(null);
   const [name, setName] = useState(null);
   const [confirmationNumber, setConfirmationNumber] = useState(null);
 
   useEffect(() => {
     generateConfirmationNumber();
-    // getProducts();
+    getProducts();
     // getCartItems();
   }, []);
 
   const getProducts = () => {
-    fetch('/api/products.php')
+    fetch('http://localhost:3003/products')
       .then(response => {
         return response.json();
       })
       .then(myJson => {
+        console.log(myJson);
         setProducts(myJson);
       })
       .catch(error => {
@@ -44,13 +49,11 @@ const App = () => {
         return response.json();
       })
       .then(myJson => {
-        setCartError(myJson);
+        setCartData(myJson);
         getCartLength(); // might have to async await here
       })
       .catch(error => {
-        this.setState({
-          cartError: error
-        });
+        console.error(error);
       });
   }
 
@@ -136,10 +139,7 @@ const App = () => {
       .catch(error => {
         console.error('Post Error: ', error);
       });
-    setView({
-      name: 'catalog',
-      params: {}
-    });
+    <Navigate to={'/catalog'}/>
     setCartData([]);
   }
 
@@ -173,95 +173,81 @@ const App = () => {
     setConfirmationNumber(confirmationNumber);
   }
 
-  if (view === 'details') {
-    return (
-      <div>
-        <Header
-          resetCardShippingName={resetCardShippingName}
-          getCartItems={getCartItems}
-          cartLength={cartLength}
-          setView={setView}
-        />
-        <ProductDetails getCartItems={getCartItems}
-          addToCart={addToCart}
-          setView={setView}
-        />
-      </div>
-    );
-  } else if (view === 'catalog') {
-    return (
-      <div>
-        <Header
-          resetCardShippingName={resetCardShippingName}
-          getCartItems={getCartItems}
-          cartLength={cartLength}
-          setView={setView}/>
-        <ProductList setView={setView}
-          productList={products}/>
-      </div>
-    );
-  } else if (view === 'cart') {
-    return (
-      <div>
-        <Header
-          resetCardShippingName={resetCardShippingName}
-          getCartItems={getCartItems}
-          cartLength={cartLength}
-          setView={setView}/>
-        <CartSummary
-          updateCart={updateCart}
-          deleteFromCart={deleteFromCart}
-          setView={setView}
-          cart={cartData}
-          getCartItems={getCartItems}/>
-      </div>
-    );
-  } else if (view === 'checkout') {
-    return (
-      <div>
-        <Header
-          resetCardShippingName={resetCardShippingName}
-          getCartItems={getCartItems}
-          cartLength={cartLength}
-          setView={setView}/>
-        <CheckoutForm
-          generateConfirmationNumber={generateConfirmationNumber}
-          cart={cartData}
-          resetCardShippingName={resetCardShippingName}
-          handleInput={handleInput}
-          setView={setView}
-          getCartItems={getCartItems}
-          creditCard={creditCard}
-          name={name}
-          shippingAddress={shippingAddress}
-          storeOrderSummaryInfo={storeOrderSummaryInfo}
-          deleteEntireCart={deleteEntireCart}/>
-      </div>
-    );
-  } else if (view === 'landingPage') {
-    return (
-      <div>
-        <LandingPage setView={setView} />
-      </div>
-    );
-  } else if (view === 'orderConfirmation') {
-    return (
-      <div>
-        <Header
-          resetCardShippingName={resetCardShippingName}
-          getCartItems={getCartItems}
-          setView={setView} />
-        <OrderConfirmation
-          confirmationNumber={confirmationNumber}
-          name={name}
-          shippingAddress={shippingAddress}
-          orderSummary={orderSummary}
-          setView={setView}
-          resetCardShippingName={resetCardShippingName}
-        />
-      </div>
-    );
-  }
+  let headerElement = <Header           
+                        resetCardShippingName={resetCardShippingName}
+                        getCartItems={getCartItems}
+                        cartLength={cartLength}
+                      />
+  return(
+    <Routes>
+      <Route path='/' element={<LandingPage />}>
+      </Route>
+      <Route path='/catalog' element={
+        <>
+          {headerElement}
+          <ProductList 
+            productList={products}
+            setCurrentItem={setCurrentItem}
+          />
+        </>
+      }>
+      </Route>
+      <Route path='/catalog/details' element={
+        <>
+          {headerElement}
+          <ProductDetails 
+            getCartItems={getCartItems}
+            addToCart={addToCart}
+            currentItem={currentItem}
+          />
+        </>
+      }>
+      </Route>
+      <Route path='/cart' element={
+        <>
+          {headerElement}
+          <CartSummary
+            updateCart={updateCart}
+            deleteFromCart={deleteFromCart}
+            cartData={cartData}
+            getCartItems={getCartItems}
+          />
+        </>
+      }>
+      </Route>
+      <Route path='/checkout' element={
+        <>
+          {headerElement}
+          <CheckoutForm
+            generateConfirmationNumber={generateConfirmationNumber}
+            cart={cartData}
+            resetCardShippingName={resetCardShippingName}
+            handleInput={handleInput}
+            getCartItems={getCartItems}
+            creditCard={creditCard}
+            name={name}
+            shippingAddress={shippingAddress}
+            storeOrderSummaryInfo={storeOrderSummaryInfo}
+            deleteEntireCart={deleteEntireCart}
+          />
+        </>
+      }>
+      </Route>
+      <Route path='/confirmation' element={
+        <>
+          {headerElement}
+          <OrderConfirmation
+            confirmationNumber={confirmationNumber}
+            name={name}
+            shippingAddress={shippingAddress}
+            orderSummary={orderSummary}
+            resetCardShippingName={resetCardShippingName}
+          />
+        </>
+      }>
+      </Route>
+    </Routes>
+  )
 }
 
 export default App;
