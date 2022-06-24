@@ -7,7 +7,7 @@ const ProductList = (props) => {
   const eachProductList = props.productList.map(element => {
     return (
       <ProductListItem 
-        key={element.shoes_key} 
+        key={element.productid} 
         setCurrentItem={props.setCurrentItem} 
         product={element}
       />
