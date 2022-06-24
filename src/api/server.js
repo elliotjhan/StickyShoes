@@ -22,9 +22,23 @@ const credentials = {
   port: 5432,
 };
 
+// async function getProducts() {
+//   const pool = new Pool(credentials);
+//   const text = `SELECT * FROM shoes`;
+//   const now = await pool.query(text);
+//   await pool.end();
+//   return now;
+// }
+
 async function getProducts() {
   const pool = new Pool(credentials);
-  const text = `SELECT * FROM shoes`;
+  const text = `
+  select shoes.productid, shoes.name, shoes.description, shoes.price, shoes.image,
+  array_agg(images.image) as carousel
+  from shoes, images
+  where shoes.productid = images.productid
+  group by shoes.productid
+  `;
   const now = await pool.query(text);
   await pool.end();
   return now;

@@ -4,7 +4,7 @@ import './../styles/product-list-item.css';
 
 const ProductListItem  = (props) => {
   const setViewCallback = () => {
-    props.setCurrentItem(props.product);
+    props.setCurrentProduct(props.product);
   }
 
   const numberWithCommas = (number) => {

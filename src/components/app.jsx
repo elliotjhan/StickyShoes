@@ -14,7 +14,7 @@ import {
 
 const App = () => {
   const [products, setProducts] = useState([]);
-  const [currentItem, setCurrentItem] = useState({});
+  const [currentProduct, setCurrentProduct] = useState(null);
   const [cartData, setCartData] = useState([]);
   const [cartLength, setCartLength] = useState(0);
   const [orderSummary, setOrderSummary] = useState([]);
@@ -187,7 +187,7 @@ const App = () => {
           {headerElement}
           <ProductList 
             productList={products}
-            setCurrentItem={setCurrentItem}
+            setCurrentProduct={setCurrentProduct}
           />
         </>
       }>
@@ -198,7 +198,8 @@ const App = () => {
           <ProductDetails 
             getCartItems={getCartItems}
             addToCart={addToCart}
-            currentItem={currentItem}
+            currentProduct={currentProduct}
+            productList={products}
           />
         </>
       }>
