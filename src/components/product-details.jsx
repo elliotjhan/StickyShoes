@@ -71,7 +71,7 @@ const ProductDetails = (props) => {
 
   if (product) {
     return (
-      <div className="container p-4 catalogItem my-5">
+      <div className="container p-3 catalogItem mt-4">
         <Link to="/catalog">
           <div className="cursor row mb-4">
             <div className="col text-dark">&lt;Back to catalog</div>

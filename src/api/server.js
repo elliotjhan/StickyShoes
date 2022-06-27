@@ -1,4 +1,5 @@
 const express = require("express");
+const session = require("express-session");
 const app = express();
 const cors = require("cors");
 const bodyParser = require("body-parser");
@@ -34,3 +35,11 @@ app.get("/products", (req, res) => {
     res.send(data.rows);
   });
 });
+
+app.use(
+  session({
+    secret: "shhhh",
+    resave: true,
+    saveUninitialized: false,
+  })
+);
