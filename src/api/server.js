@@ -68,11 +68,16 @@ app.post("/addtocart", (req, res) => {
     req.body.price,
     req.session.cartid
   );
+  res.json("Successfully added to cart");
 });
 
 async function getCart(cartid) {
   const pool = new Pool(functions.credentials);
-  const text = `SELECT * FROM cart WHERE cartid = ${cartid}`;
+  const text = `
+    SELECT * FROM cart 
+    INNER JOIN shoes ON cart.productid = shoes.productid
+    WHERE cartid = ${cartid}
+  `;
   const now = await pool.query(text);
   await pool.end();
   return now;

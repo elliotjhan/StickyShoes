@@ -81,10 +81,12 @@ const App = () => {
         'Content-Type': 'application/json'
       }
     })
+      .then((response) => {
+        getCartItems();
+      })
       .catch(error => {
         console.error('Post Error: ', error);
       });
-    getCartItems();
   }
 
   const updateCart = (productId, count) => {
@@ -217,6 +219,7 @@ const App = () => {
             updateCart={updateCart}
             deleteFromCart={deleteFromCart}
             cartData={cartData}
+            cartLength={cartLength}
             getCartItems={getCartItems}
           />
         </>

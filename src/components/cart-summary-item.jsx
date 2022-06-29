@@ -1,13 +1,14 @@
 import React, { useState, useEffect } from 'react';
 import QuantityUpdate from './quantityUpdate';
 import { Button, Modal, ModalHeader, ModalBody, ModalFooter } from 'reactstrap';
+import './../styles/cart-summary-item.css';
 
 const CartSummaryItem = (props) => {
-  const [count, setCount] = useState(0);
+  const [quantity, setQuantity] = useState(0);
   const [modalIsOpen, setModalIsOpen] = useState(false);
 
   useEffect(() => {
-    handleCount();
+    handleQuantity();
   }, [])
 
   const handleDeleteCallback = () => {
@@ -18,28 +19,28 @@ const CartSummaryItem = (props) => {
 
   const handleUpdateCallback = () => {
     let product = props.product;
-    props.updateCart(product.id, count);
+    props.updateCart(product.id, quantity);
     props.getCartItems();
   }
 
-  const handleCount = () => {
-    setCount(props.count);
+  const handleQuantity = () => {
+    setQuantity(props.quantity);
   }
 
   const increment = () => {
-    setCount(count + 1);
+    setQuantity(quantity + 1);
   }
 
   const decrement = () => {
-    if (count < 0) {
-      setCount(0);
+    if (quantity < 0) {
+      setQuantity(0);
     } else {
-      setCount(count - 1);
+      setQuantity(quantity - 1);
     }
   }
 
   let product = props.product;
-  let imageName = props.image;
+  let imageName = product.image;
   const background = require(`./../assets/images/${imageName}`);
   const style = {
     backgroundImage: `url(${background})`,
@@ -48,19 +49,19 @@ const CartSummaryItem = (props) => {
     backgroundRepeat: 'no-repeat'
   };
   return (
-    <div className="container p-4">
-      <div className="row mt-3">
-        <div className="col productItem" style={style}></div>
-        <div className="text-left col-sm-6 mt-3 text-center">
-          <h6 className="cartProductName">{product.name}</h6><br/>
+    <div className="container">
+      <div className="row align-items-center">
+        <div className="col-sm-6 productItem" style={style}></div>
+        <div className="col-sm-6 text-center">
+          <div className="cartProductName">{product.name}</div><br/>
           <div className="productPrice">Price: ${product.price}</div>
-          <QuantityUpdate increment={increment} decrement={decrement} quantity={count}/>
+          <QuantityUpdate increment={increment} decrement={decrement} quantity={quantity}/>
           <button onClick={() => handleUpdateCallback()} className="btn btn-primary">Update</button>
-          <button onClick={() => setModalIsOpen(!modalIsOpen)} className="btn btn-danger ml-2">Delete</button>
+          <button onClick={() => setModalIsOpen(!modalIsOpen)} className="btn btn-danger">Delete</button>
         </div>
       </div>
 
-      <Modal isOpen={this.state.modalIsOpen}>
+      <Modal isOpen={modalIsOpen}>
         <ModalHeader>
             Caution!
         </ModalHeader>
