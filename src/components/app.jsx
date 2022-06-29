@@ -89,17 +89,20 @@ const App = () => {
       });
   }
 
-  const updateCart = (productId, count) => {
-    fetch('/api/cart.php', {
+  const updateCart = (quantity, productid) => {
+    fetch('/updatecart', {
       method: 'PUT',
       body: JSON.stringify({
-        id: parseInt(productId),
-        newCount: count
+        quantity,
+        productid
       }),
       headers: {
         'Content-Type': 'application/json'
       }
     })
+      .then(response => {
+        getCartItems();
+      })
       .catch(error => {
         console.error('Post Error: ', error);
       });

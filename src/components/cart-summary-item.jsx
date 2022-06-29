@@ -8,24 +8,8 @@ const CartSummaryItem = (props) => {
   const [modalIsOpen, setModalIsOpen] = useState(false);
 
   useEffect(() => {
-    handleQuantity();
-  }, [])
-
-  const handleDeleteCallback = () => {
-    let product = props.product;
-    props.deleteFromCart(product.id);
-    props.getCartItems();
-  }
-
-  const handleUpdateCallback = () => {
-    let product = props.product;
-    props.updateCart(product.id, quantity);
-    props.getCartItems();
-  }
-
-  const handleQuantity = () => {
     setQuantity(props.quantity);
-  }
+  }, [])
 
   const increment = () => {
     setQuantity(quantity + 1);
@@ -56,7 +40,7 @@ const CartSummaryItem = (props) => {
           <div className="cartProductName">{product.name}</div><br/>
           <div className="productPrice">Price: ${product.price}</div>
           <QuantityUpdate increment={increment} decrement={decrement} quantity={quantity}/>
-          <button onClick={() => handleUpdateCallback()} className="btn btn-primary">Update</button>
+          <button onClick={() => props.updateCart(quantity, props.product.productid)} className="btn btn-primary">Update</button>
           <button onClick={() => setModalIsOpen(!modalIsOpen)} className="btn btn-danger">Delete</button>
         </div>
       </div>
@@ -70,7 +54,7 @@ const CartSummaryItem = (props) => {
         </ModalBody>
         <ModalFooter>
           <Button onClick={() => setModalIsOpen(!modalIsOpen)}>No</Button>
-          <Button onClick={() => handleDeleteCallback()} color="primary">Yes</Button>
+          <Button onClick={() => props.updateCart(0, props.product.productid)} color="primary">Yes</Button>
         </ModalFooter>
       </Modal>
 
