@@ -1,120 +1,81 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import QuantityUpdate from './quantityUpdate';
 import { Button, Modal, ModalHeader, ModalBody, ModalFooter } from 'reactstrap';
+import './../styles/cart-summary-item.css';
 
-class CartSummaryItem extends React.Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      count: 0,
-      modalIsOpen: false
-    };
-    this.handleUpdateCallback = this.handleUpdateCallback.bind(this);
-    this.handleDeleteCallback = this.handleDeleteCallback.bind(this);
-    this.increment = this.increment.bind(this);
-    this.decrement = this.decrement.bind(this);
-    this.toggleModal = this.toggleModal.bind(this);
+const CartSummaryItem = (props) => {
+  const [quantity, setQuantity] = useState(0);
+  const [modalIsOpen, setModalIsOpen] = useState(false);
+
+  useEffect(() => {
+    handleQuantity();
+  }, [])
+
+  const handleDeleteCallback = () => {
+    let product = props.product;
+    props.deleteFromCart(product.id);
+    props.getCartItems();
   }
 
-  componentDidMount() {
-    this.handleCount();
+  const handleUpdateCallback = () => {
+    let product = props.product;
+    props.updateCart(product.id, quantity);
+    props.getCartItems();
   }
 
-  numberWithCommas(number) {
-    let newNumber = (parseFloat(number) / 100).toFixed(2);
-    return newNumber.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',');
+  const handleQuantity = () => {
+    setQuantity(props.quantity);
   }
 
-  handleDeleteCallback() {
-    let product = this.props.product;
-    this.props.deleteFromCart(product.id);
-    // setTimeout(()=> {
-    //   this.props.getCartItems();
-    // }, 200)
-    this.props.getCartItems();
-
+  const increment = () => {
+    setQuantity(quantity + 1);
   }
 
-  handleUpdateCallback() {
-    let product = this.props.product;
-    let newCount = this.state.count;
-    this.props.updateCart(product.id, newCount);
-    // setTimeout(()=> {
-    //   this.props.getCartItems();
-    // }, 200)
-    this.props.getCartItems();
-
-  }
-
-  handleCount() {
-    this.setState({
-      count: this.props.count
-    });
-  }
-
-  increment() {
-    let count = this.state.count;
-    let newCount = ++count;
-    this.setState({
-      count: newCount
-    });
-  }
-
-  decrement() {
-    let count = this.state.count;
-    let newCount = --count;
-    if (newCount < 0) {
-      newCount = 0;
+  const decrement = () => {
+    if (quantity < 0) {
+      setQuantity(0);
+    } else {
+      setQuantity(quantity - 1);
     }
-    this.setState({
-      count: newCount
-    });
   }
 
-  toggleModal() {
-    this.setState({
-      modalIsOpen: !this.state.modalIsOpen
-    });
-  }
-
-  render() {
-    let product = this.props.product;
-    const style = {
-      backgroundImage: `url(${product.image})`,
-      backgroundPosition: 'center',
-      backgroundSize: 'contain',
-      backgroundRepeat: 'no-repeat'
-    };
-    return (
-      <div className="container p-4">
-        <div className="row mt-3">
-          <div className="col productItem" style={style}></div>
-          <div className="text-left col-sm-6 mt-3 text-center">
-            <h6 className="cartProductName">{product.name}</h6><br/>
-            <div className="productPrice">Price: ${this.numberWithCommas(product.price)}</div>
-            <QuantityUpdate increment={this.increment} decrement={this.decrement} quantity={this.state.count}/>
-            <button onClick={this.handleUpdateCallback} className="btn btn-primary">Update</button>
-            <button onClick={this.toggleModal} className="btn btn-danger ml-2">Delete</button>
-          </div>
+  let product = props.product;
+  let imageName = product.image;
+  const background = require(`./../assets/images/${imageName}`);
+  const style = {
+    backgroundImage: `url(${background})`,
+    backgroundPosition: 'center',
+    backgroundSize: 'contain',
+    backgroundRepeat: 'no-repeat'
+  };
+  return (
+    <div className="container">
+      <div className="row align-items-center">
+        <div className="col-sm-6 productItem" style={style}></div>
+        <div className="col-sm-6 text-center">
+          <div className="cartProductName">{product.name}</div><br/>
+          <div className="productPrice">Price: ${product.price}</div>
+          <QuantityUpdate increment={increment} decrement={decrement} quantity={quantity}/>
+          <button onClick={() => handleUpdateCallback()} className="btn btn-primary">Update</button>
+          <button onClick={() => setModalIsOpen(!modalIsOpen)} className="btn btn-danger">Delete</button>
         </div>
-
-        <Modal isOpen={this.state.modalIsOpen}>
-          <ModalHeader>
-              Caution!
-          </ModalHeader>
-          <ModalBody>
-              Are you sure you want to delete {product.name}?
-          </ModalBody>
-          <ModalFooter>
-            <Button onClick={this.toggleModal}>No</Button>
-            <Button onClick={this.handleDeleteCallback} color="primary">Yes</Button>
-          </ModalFooter>
-        </Modal>
-
       </div>
-    );
-  }
 
+      <Modal isOpen={modalIsOpen}>
+        <ModalHeader>
+            Caution!
+        </ModalHeader>
+        <ModalBody>
+            Are you sure you want to delete {product.name}?
+        </ModalBody>
+        <ModalFooter>
+          <Button onClick={() => setModalIsOpen(!modalIsOpen)}>No</Button>
+          <Button onClick={() => handleDeleteCallback()} color="primary">Yes</Button>
+        </ModalFooter>
+      </Modal>
+
+    </div>
+  );
 }
 
 export default CartSummaryItem;

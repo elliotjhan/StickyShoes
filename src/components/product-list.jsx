@@ -1,14 +1,20 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import ProductListItem from './product-list-item';
 import './../styles/product-list.css';
 import { Link } from 'react-router-dom'; 
+import Cookies from 'js-cookie';
+
 
 const ProductList = (props) => {
+  useEffect(() => { 
+    Cookies.remove('currentProduct');
+  });
+
   const eachProductList = props.productList.map(element => {
     return (
       <ProductListItem 
-        key={element.shoes_key} 
-        setCurrentItem={props.setCurrentItem} 
+        key={element.productid} 
+        setCurrentProduct={props.setCurrentProduct} 
         product={element}
       />
     );

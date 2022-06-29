@@ -1,60 +1,54 @@
 import React from 'react';
 import CartSummaryItem from './cart-summary-item';
 import { Link } from 'react-router-dom'; 
+import './../styles/cart-summary.css';
 
 const CartSummary = (props) => {
   const numberWithCommas = (number) => {
-    let newNumber = (parseFloat(number) / 100).toFixed(2);
+    let newNumber = (parseFloat(number)).toFixed(2);
     return newNumber.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',');
   }
 
   const getCartTotal = () => {
     let cartTotal = 0;
     props.cartData.forEach(element => {
-      cartTotal += parseFloat(element.price * element.count);
+      cartTotal += parseFloat(element.price * element.quantity);
     });
     return numberWithCommas(cartTotal);
   }
 
-  const getCartLength = () => {
-    let cartLength = 0;
-    props.cart.forEach(element => {
-      cartLength += parseFloat(element.count);
-    });
-    return cartLength;
-  }
-
-  let cartItemArray = props.cartData;
-  let cartItemArrayDisplay = null;
-  if (cartItemArray.length !== 0) {
+  if (props.cartData && props.cartData.length > 0) {
+    let cartItemArray = props.cartData;
+    let cartItemArrayDisplay = null;
     cartItemArrayDisplay = cartItemArray.map(element => {
-      return <CartSummaryItem
-        updateCart={props.updateCart}
-        getCartItems={props.getCartItems}
-        count={element.count}
-        deleteFromCart={props.deleteFromCart}
-        className="row" key={element.id}
-        product={element} />;
+      return (
+        <CartSummaryItem
+          updateCart={props.updateCart}
+          getCartItems={props.getCartItems}
+          quantity={element.quantity}
+          deleteFromCart={props.deleteFromCart}
+          key={element.id}
+          product={element} 
+        />
+      ) 
     });
-  }
 
-  if (cartItemArrayDisplay !== null) {
     return (
       <div className="container cartContainer">
         <Link to={'/catalog'}>
-          <div className="cursor row text-dark">&lt;Back to Catalog</div><br/>
+          <div className="cursor row text-secondary pt-2 ps-2">&lt;Back to Catalog</div><br/>
         </Link>
-        <div className="display-4 row">
+        <div className="display-5 row">
           <div className="col cartSummary">Cart Summary:</div>
         </div>
         <div>
           {cartItemArrayDisplay}
         </div>
         <div className="row align-items-center">
-          <div className="col text-left mt-3 cartSubtotal">Subtotal ({getCartLength()} items): {getCartTotal()}</div>
-          <div className="col text-right ">
+          <div className="col text-center cartSubtotal">Subtotal ({props.cartLength} items): ${getCartTotal()}</div>
+          <div className="col text-center align-items-center justify-content-center">
             <Link to={'/catalog'}>
-              <button className="btn btn-info mr-2 cartShoppingButton">Keep Shopping</button>
+              <button className="btn btn-info cartShoppingButton">Keep Shopping</button>
             </Link>
             <Link to={'/checkout'}>
               <button className="btn btn-primary cartCheckoutButton">Checkout</button>

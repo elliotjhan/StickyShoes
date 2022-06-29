@@ -1,4 +1,5 @@
 import React from 'react';
+import './../styles/quantity.css';
 
 const QuantityUpdate = (props) => {
   return (
