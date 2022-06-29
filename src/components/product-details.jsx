@@ -34,11 +34,8 @@ const ProductDetails = (props) => {
   }
 
   const addToCart = () => {
-    props.addToCart(product, quantity);
-    setTimeout(() => {
-      props.getCartItems();
-    }, 100);
-    setModalIsOpen(!modalIsOpen)
+    props.addToCart(product.productid, quantity, product.price);
+    setModalIsOpen(!modalIsOpen);
   }
 
   const numberWithCommas = (number) => { // regex method to put in commas at thousands places
@@ -92,7 +89,7 @@ const ProductDetails = (props) => {
           </div>
           <div className="text-center col-lg-6 mt-3">
             <div className="display-3 productDetailsName">{product.name}</div><br/>
-            <h3 className="font-weight-bold">${numberWithCommas(product.price)}</h3><br/>
+            <h3 className="font-weight-bold">${product.price}</h3><br/>
             <div className="font-italic">{product.description}</div><br/>
             <Quantity 
               increment={increment}

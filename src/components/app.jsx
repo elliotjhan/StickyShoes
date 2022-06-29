@@ -26,11 +26,15 @@ const App = () => {
   useEffect(() => {
     generateConfirmationNumber();
     getProducts();
-    // getCartItems();
+    getCartItems();
   }, []);
+  
+  // useEffect(() => {
+  //   getCartItems();
+  // }, [cartData]);
 
   const getProducts = () => {
-    fetch('http://localhost:3003/products')
+    fetch('/products')
       .then(response => {
         return response.json();
       })
@@ -44,33 +48,34 @@ const App = () => {
   }
 
   const getCartItems = () => {
-    fetch('/api/cart.php')
+    fetch('/cart')
       .then(response => {
         return response.json();
       })
       .then(myJson => {
         setCartData(myJson);
-        getCartLength(); // might have to async await here
+        getCartLength(myJson);
       })
       .catch(error => {
         console.error(error);
       });
   }
 
-  const getCartLength = () => {
+  const getCartLength = (data) => {
     let length = 0;
-    for (let i = 0; i < cartData.length; i++) {
-      length += parseInt(cartData[i].count);
+    for (let i = 0; i < data.length; i++) {
+      length += parseInt(data[i].quantity);
     }
     setCartLength(length);
   }
 
-  const addToCart = (product, quantity) => {
-    fetch('/api/cart.php', {
+  const addToCart = (productid, quantity, price) => {
+    fetch('/addtocart', {
       method: 'POST',
       body: JSON.stringify({
-        id: parseInt(product.id),
-        count: quantity
+        productid,
+        quantity,
+        price
       }),
       headers: {
         'Content-Type': 'application/json'
@@ -79,6 +84,7 @@ const App = () => {
       .catch(error => {
         console.error('Post Error: ', error);
       });
+    getCartItems();
   }
 
   const updateCart = (productId, count) => {
