@@ -6,11 +6,7 @@ import CartSummary from './cart-summary';
 import CheckoutForm from './checkout-form';
 import LandingPage from './landing-page';
 import OrderConfirmation from './order-confirmation';
-import {
-  Routes,
-  Route,
-  Navigate
-} from "react-router-dom";
+import { Routes, Route, Navigate } from "react-router-dom";
 
 const App = () => {
   const [products, setProducts] = useState([]);
@@ -28,10 +24,6 @@ const App = () => {
     getProducts();
     getCartItems();
   }, []);
-  
-  // useEffect(() => {
-  //   getCartItems();
-  // }, [cartData]);
 
   const getProducts = () => {
     fetch('/products')
@@ -81,12 +73,12 @@ const App = () => {
         'Content-Type': 'application/json'
       }
     })
-      .then((response) => {
-        getCartItems();
-      })
-      .catch(error => {
-        console.error('Post Error: ', error);
-      });
+    .then((response) => {
+      getCartItems();
+    })
+    .catch(error => {
+      console.error('Post Error: ', error);
+    });
   }
 
   const updateCart = (quantity, productid) => {
@@ -100,31 +92,16 @@ const App = () => {
         'Content-Type': 'application/json'
       }
     })
-      .then(response => {
-        getCartItems();
-      })
-      .catch(error => {
-        console.error('Post Error: ', error);
-      });
-  }
-
-  const deleteFromCart = (productId) => {
-    fetch('/api/cart.php', {
-      method: 'DELETE',
-      body: JSON.stringify({
-        id: parseInt(productId)
-      }),
-      headers: {
-        'Content-Type': 'application/json'
-      }
+    .then(response => {
+      getCartItems();
     })
-      .catch(error => {
-        console.error('Post Error: ', error);
-      });
+    .catch(error => {
+      console.error('Post Error: ', error);
+    });
   }
 
-  const deleteEntireCart = (cartId) => {
-    fetch('/api/cart.php', {
+  const deleteCart = (cartId) => {
+    fetch('/deletecart', {
       method: 'DELETE',
       body: JSON.stringify({
         cartId: parseInt(cartId)
@@ -133,9 +110,12 @@ const App = () => {
         'Content-Type': 'application/json'
       }
     })
-      .catch(error => {
-        console.error('Post Error: ', error);
-      });
+    .then(response => {
+      getCartItems();
+    })
+    .catch(error => {
+      console.error('Post Error: ', error);
+    });
   }
 
   const placeOrder = (object) => {
@@ -220,7 +200,6 @@ const App = () => {
           {headerElement}
           <CartSummary
             updateCart={updateCart}
-            deleteFromCart={deleteFromCart}
             cartData={cartData}
             cartLength={cartLength}
             getCartItems={getCartItems}
@@ -232,16 +211,13 @@ const App = () => {
         <>
           {headerElement}
           <CheckoutForm
-            generateConfirmationNumber={generateConfirmationNumber}
-            cart={cartData}
-            resetCardShippingName={resetCardShippingName}
-            handleInput={handleInput}
+            cartData={cartData}
             getCartItems={getCartItems}
             creditCard={creditCard}
             name={name}
             shippingAddress={shippingAddress}
             storeOrderSummaryInfo={storeOrderSummaryInfo}
-            deleteEntireCart={deleteEntireCart}
+            deleteCart={deleteCart}
           />
         </>
       }>

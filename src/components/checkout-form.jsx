@@ -3,9 +3,9 @@ import { Button, Modal, ModalHeader, ModalBody, ModalFooter } from 'reactstrap';
 import { Link, Navigate } from 'react-router-dom'; 
 
 const CheckoutForm = (props) => {
-  // const [name, setname] = useState(null);
-  // const [creditCard, setcreditCard] = useState(null);
-  // const [shippingAddress, setshippingAddress] = useState(null);
+  const [name, setname] = useState(null);
+  const [creditCard, setcreditCard] = useState(null);
+  const [shippingAddress, setshippingAddress] = useState(null);
   const [modalIsOpen, setmodalIsOpen] = useState(false);
   const [info, setInfo] = useState({
     name: null,
@@ -14,7 +14,7 @@ const CheckoutForm = (props) => {
   })
 
   const numberWithCommas = (number) => {
-    let newNumber = (parseFloat(number) / 100).toFixed(2);
+    let newNumber = (parseFloat(number)).toFixed(2);
     return newNumber.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',');
   }
 
@@ -29,25 +29,12 @@ const CheckoutForm = (props) => {
   const handleInput = (event) => {
     let value = event.target.value; // this updates state as the user types in their input through onChange
     let name = event.target.name;
-    // this.setState({
-    //   [name]: value
-    // });
     setInfo(info[name] = value);
-  }
-
-  const handleSetView = () => {
-    let setView = this.props.setView;
-    let catalog = 'catalog';
-    let params = '{}';
-    setView(catalog, params);
-    this.props.getCartItems();
   }
 
   const handleDeleteCartUponCompletingCheckout = () => {
     setmodalIsOpen(!modalIsOpen)
-    let deleteEntireCart = props.deleteEntireCart;
-    let cartId = props.cart[0].cartID;
-    deleteEntireCart(cartId);
+    props.deleteCart();
     <Navigate to="/catalog" />
   }
 
@@ -56,7 +43,7 @@ const CheckoutForm = (props) => {
         <div className="row">
           <div className="col col-sm-12">
             <div className="display-4 checkoutTitle">Checkout</div>
-              Order Total: ${this.getCartTotal()}
+              Order Total: ${getCartTotal()}
           </div>
         </div>
         <br/>
@@ -64,19 +51,19 @@ const CheckoutForm = (props) => {
         <div className="row">
           <div className="col">
             Name <br/>
-            <input className="form-control" name="name" type="text" onChange={() => handleInput()}/>
+            <input className="form-control" name="name" type="text" onChange={(e) => handleInput(e)}/>
           </div>
         </div> <br/>
         <div className="row">
           <div className="col">
             Credit Card <br/>
-            <input className="form-control" name="creditCard" type="text" onChange={() => handleInput()}/>
+            <input className="form-control" name="creditCard" type="text" onChange={(e) => handleInput(e)}/>
           </div>
         </div> <br/>
         <div className="row">
           <div className="col">
             Shipping Address <br/>
-            <textarea rows="4" className="form-control" name="shippingAddress" type="text" onChange={() => handleInput()}/>
+            <textarea rows="4" className="form-control" name="shippingAddress" type="text" onChange={(e) => handleInput(e)}/>
           </div>
         </div>
         <div className="row mt-2">
