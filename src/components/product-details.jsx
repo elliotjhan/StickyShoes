@@ -39,7 +39,7 @@ const ProductDetails = (props) => {
   }
 
   const numberWithCommas = (number) => { // regex method to put in commas at thousands places
-    let newNumber = (parseFloat(number) / 100).toFixed(2);
+    let newNumber = (parseFloat(number)).toFixed(2);
     return newNumber.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',');
   }
 
@@ -89,7 +89,7 @@ const ProductDetails = (props) => {
           </div>
           <div className="text-center col-lg-6 mt-3">
             <div className="display-3 productDetailsName">{product.name}</div><br/>
-            <h3 className="font-weight-bold">${product.price}</h3><br/>
+            <h3 className="font-weight-bold">${numberWithCommas(product.price)}</h3><br/>
             <div className="font-italic">{product.description}</div><br/>
             <Quantity 
               increment={increment}

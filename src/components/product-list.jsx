@@ -1,7 +1,6 @@
 import React, { useEffect } from 'react';
 import ProductListItem from './product-list-item';
 import './../styles/product-list.css';
-import { Link } from 'react-router-dom'; 
 import Cookies from 'js-cookie';
 
 
@@ -26,7 +25,6 @@ const ProductList = (props) => {
       <div className="row justify-content-center productListContainer">{eachProductList}</div>
     </div>
   );
-
 }
 
 export default ProductList;

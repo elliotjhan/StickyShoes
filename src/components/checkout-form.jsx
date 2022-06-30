@@ -140,7 +140,6 @@ const CheckoutForm = (props) => {
       </div>
     )
   }
-
 }
 
 export default CheckoutForm;

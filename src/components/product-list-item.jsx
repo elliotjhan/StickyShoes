@@ -8,7 +8,7 @@ const ProductListItem  = (props) => {
   }
 
   const numberWithCommas = (number) => {
-    let newNumber = (parseFloat(number) / 100).toFixed(2);
+    let newNumber = (parseFloat(number)).toFixed(2);
     return newNumber.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',');
   }
   let product = props.product;
@@ -29,7 +29,7 @@ const ProductListItem  = (props) => {
         </div>
         <div className="productInfo card-body">
           <div className="font-weight-bold productName">{product.name}</div>
-          <div className="productPrice">${product.price}</div>
+          <div className="productPrice">${numberWithCommas(product.price)}</div>
           <Link to={'/catalog/details'}>
             <button className="btn btn-info mt-3 moreInfoButton" onClick={() => setViewCallback()}>More Info</button>
           </Link>
