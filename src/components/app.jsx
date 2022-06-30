@@ -14,7 +14,6 @@ const App = () => {
   const [cartData, setCartData] = useState([]);
   const [cartLength, setCartLength] = useState(0);
   const [orderSummary, setOrderSummary] = useState([]);
-  const [confirmationNumber, setConfirmationNumber] = useState(null);
   const [info, setInfo] = useState({
     name: null,
     creditCard: null,
@@ -25,7 +24,6 @@ const App = () => {
   });
 
   useEffect(() => {
-    generateConfirmationNumber();
     getProducts();
     getCartItems();
   }, []);
@@ -122,20 +120,6 @@ const App = () => {
     });
   }
 
-  const generateConfirmationNumber = () => {
-    const letters = ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M', 'N', 'O', 'P', 'Q', 'R', 'S', 'T', 'U', 'V', 'W', 'X', 'Y', 'Z'];
-    const numbers = [1, 2, 3, 4, 5, 6, 7, 8, 9, 0];
-    const pool = [letters, numbers];
-    let confirmationNumber = '';
-    for (let i = 0; i < 10; i++) {
-      let zeroOrOne = Math.floor(Math.random() * 2);
-      let currentPool = pool[zeroOrOne];
-      let currentSelection = currentPool[Math.floor(Math.random() * currentPool.length)];
-      confirmationNumber += currentSelection;
-    }
-    setConfirmationNumber(confirmationNumber);
-  }
-
   let headerElement = <Header cartLength={cartLength}/>
   return(
     <Routes>
@@ -192,8 +176,6 @@ const App = () => {
         <>
           {headerElement}
           <OrderConfirmation
-            generateConfirmationNumber={generateConfirmationNumber}
-            confirmationNumber={confirmationNumber}
             setInfo={setInfo}
             info={info}
             orderSummary={orderSummary}

@@ -4,6 +4,7 @@ import './../styles/order-confirmation.css';
 
 const OrderConfirmation = (props) => {
   const [confirmationInfo, setConfirmationInfo] = useState({});
+  const [confirmationNumber, setConfirmationNumber] = useState(0);
 
   const numberWithCommas = (number) => {
     let newNumber = (parseFloat(number)).toFixed(2);
@@ -11,6 +12,7 @@ const OrderConfirmation = (props) => {
   }
 
   useEffect(() => {
+    setConfirmationNumber(Math.floor(Math.random() * 100000));
     setConfirmationInfo(props.info);
     props.deleteCart();
     props.setInfo({
@@ -24,7 +26,6 @@ const OrderConfirmation = (props) => {
   }, [])
 
   const handleBackToCatalog = () => {
-    props.generateConfirmationNumber();
     props.setOrderSummary([]);
   }
 
@@ -81,7 +82,7 @@ const OrderConfirmation = (props) => {
         </div>
         <br/>
         <div className="row">
-          <div className="col orderSummaryItemTotal">Confirmation#: {props.confirmationNumber}</div>
+          <div className="col orderSummaryItemTotal">Confirmation#: {confirmationNumber}</div>
         </div>
         <div className="row">
           <div className="col orderSummaryItemTotal">
