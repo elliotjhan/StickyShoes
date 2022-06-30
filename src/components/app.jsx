@@ -13,11 +13,15 @@ const App = () => {
   const [currentProduct, setCurrentProduct] = useState(null);
   const [cartData, setCartData] = useState([]);
   const [cartLength, setCartLength] = useState(0);
-  const [orderSummary, setOrderSummary] = useState([]);
-  const [creditCard, setCreditCard] = useState(null);
-  const [shippingAddress, setShippingAddress] = useState(null);
-  const [name, setName] = useState(null);
   const [confirmationNumber, setConfirmationNumber] = useState(null);
+  const [info, setInfo] = useState({
+    name: null,
+    creditCard: null,
+    address: null,
+    city: null,
+    state: null,
+    zipcode: null
+  });
 
   useEffect(() => {
     generateConfirmationNumber();
@@ -118,38 +122,6 @@ const App = () => {
     });
   }
 
-  const placeOrder = (object) => {
-    let currentOrder = cartData.push(object); // object in this case is the name, credit card, and address
-    fetch('/api/orders.php', {
-      method: 'POST',
-      body: JSON.stringify(currentOrder),
-      headers: {
-        'Content-Type': 'application/json'
-      }
-    })
-      .catch(error => {
-        console.error('Post Error: ', error);
-      });
-    <Navigate to={'/catalog'}/>
-    setCartData([]);
-  }
-
-  const storeOrderSummaryInfo = (cart) => {
-    setOrderSummary(cart);
-  }
-
-  const handleInput = (event) => {
-    let value = event.target.value; // this updates state as the user types in their input through onChange
-    let name = event.target.name;
-    setName(value);
-  }
-
-  const resetCardShippingName = () => {
-    setName(null);
-    setShippingAddress(null);
-    setCreditCard(null);
-  }
-
   const generateConfirmationNumber = () => {
     const letters = ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M', 'N', 'O', 'P', 'Q', 'R', 'S', 'T', 'U', 'V', 'W', 'X', 'Y', 'Z'];
     const numbers = [1, 2, 3, 4, 5, 6, 7, 8, 9, 0];
@@ -165,7 +137,6 @@ const App = () => {
   }
 
   let headerElement = <Header           
-                        resetCardShippingName={resetCardShippingName}
                         getCartItems={getCartItems}
                         cartLength={cartLength}
                       />
@@ -213,11 +184,8 @@ const App = () => {
           <CheckoutForm
             cartData={cartData}
             getCartItems={getCartItems}
-            creditCard={creditCard}
-            name={name}
-            shippingAddress={shippingAddress}
-            storeOrderSummaryInfo={storeOrderSummaryInfo}
-            deleteCart={deleteCart}
+            info={info}
+            setInfo={setInfo}
           />
         </>
       }>
@@ -226,11 +194,12 @@ const App = () => {
         <>
           {headerElement}
           <OrderConfirmation
+            generateConfirmationNumber={generateConfirmationNumber}
             confirmationNumber={confirmationNumber}
-            name={name}
-            shippingAddress={shippingAddress}
-            orderSummary={orderSummary}
-            resetCardShippingName={resetCardShippingName}
+            setInfo={setInfo}
+            info={info}
+            cartData={cartData}
+            deleteCart={deleteCart}
           />
         </>
       }>

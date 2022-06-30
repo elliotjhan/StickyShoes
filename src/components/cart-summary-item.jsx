@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import QuantityUpdate from './quantityUpdate';
-import { Button, Modal, ModalHeader, ModalBody, ModalFooter } from 'reactstrap';
+import { Button, Modal, ModalBody, ModalFooter } from 'reactstrap';
 import './../styles/cart-summary-item.css';
 
 const CartSummaryItem = (props) => {
@@ -16,7 +16,7 @@ const CartSummaryItem = (props) => {
   }
 
   const decrement = () => {
-    if (quantity < 0) {
+    if (quantity < 1) {
       setQuantity(0);
     } else {
       setQuantity(quantity - 1);
@@ -32,23 +32,20 @@ const CartSummaryItem = (props) => {
     backgroundSize: 'contain',
     backgroundRepeat: 'no-repeat'
   };
+
   return (
     <div className="container">
       <div className="row align-items-center">
         <div className="col-sm-6 productItem" style={style}></div>
         <div className="col-sm-6 text-center">
-          <div className="cartProductName">{product.name}</div><br/>
-          <div className="productPrice">Price: ${product.price}</div>
+          <div className="cartProductName">{product.name}</div>
+          <div className="productPrice">${product.price}</div>
           <QuantityUpdate increment={increment} decrement={decrement} quantity={quantity}/>
-          <button onClick={() => props.updateCart(quantity, props.product.productid)} className="btn btn-primary">Update</button>
           <button onClick={() => setModalIsOpen(!modalIsOpen)} className="btn btn-danger">Delete</button>
+          <button onClick={() => props.updateCart(quantity, props.product.productid)} className="btn btn-primary">Update</button>
         </div>
       </div>
-
       <Modal isOpen={modalIsOpen}>
-        <ModalHeader>
-            Caution!
-        </ModalHeader>
         <ModalBody>
             Are you sure you want to delete {product.name}?
         </ModalBody>
@@ -57,7 +54,6 @@ const CartSummaryItem = (props) => {
           <Button onClick={() => props.updateCart(0, props.product.productid)} color="primary">Yes</Button>
         </ModalFooter>
       </Modal>
-
     </div>
   );
 }

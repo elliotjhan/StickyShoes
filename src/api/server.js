@@ -113,9 +113,19 @@ async function updateCart(quantity, cartid, productid) {
 }
 
 app.put("/updatecart", (req, res) => {
-  console.log(req.body);
   updateCart(req.body.quantity, req.session.cartid, req.body.productid);
   res.json("Successfully updated cart");
 });
 
-async function deleteCart() {}
+async function deleteCart(cartid) {
+  const pool = new Pool(functions.credentials);
+  const text = `DELETE FROM cart WHERE cartid = ${cartid}`;
+  await pool.query(text);
+  await pool.end();
+}
+
+app.delete("/deletecart", (req, res) => {
+  deleteCart(req.session.cartid).then(() =>
+    res.json("Successfully deleted cart")
+  );
+});
