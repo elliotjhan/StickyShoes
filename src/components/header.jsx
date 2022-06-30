@@ -3,10 +3,6 @@ import './../styles/header.css';
 import { Link } from 'react-router-dom'; 
 
 const Header = (props) => {
-  const handleCartClick = () => {
-    //props.getCartItems();
-  }
-
   return (
     <div className="container-fluid headerContainer">
       <div className="row headerRow">
@@ -20,7 +16,7 @@ const Header = (props) => {
         </div>
         <div className="col-lg-4 col-md-4 col-sm-4 mt-3 headerCartContainer">
           <Link to={'/cart'}>
-            <div onClick={() => handleCartClick()} className="cursor text-white shoppingCart">
+            <div className="cursor text-white shoppingCart">
               <div className="cartLength">
                 {props.cartLength}
               </div>

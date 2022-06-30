@@ -38,17 +38,17 @@ const CartSummary = (props) => {
         <Link to={'/catalog'}>
           <div className="cursor row text-secondary pt-2 ps-2">&lt;Back to Catalog</div><br/>
         </Link>
-        <div className="display-5 row">
+        <div className="row">
           <div className="col cartSummary">Cart Summary:</div>
         </div>
         <div>
           {cartItemArrayDisplay}
         </div>
         <div className="row align-items-center">
-          <div className="col text-center cartSubtotal">Subtotal ({props.cartLength} items): ${getCartTotal()}</div>
-          <div className="col text-center align-items-center justify-content-center">
+          <div className="col cartSubtotal">Subtotal ({props.cartLength} items): ${getCartTotal()}</div>
+          <div className="col text-center">
             <Link to={'/catalog'}>
-              <button className="btn btn-info cartShoppingButton">Keep Shopping</button>
+              <button className="btn btn-info cartShoppingButton me-1">Keep Shopping</button>
             </Link>
             <Link to={'/checkout'}>
               <button className="btn btn-primary cartCheckoutButton">Checkout</button>

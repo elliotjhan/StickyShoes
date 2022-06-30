@@ -1,5 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router-dom'; 
+import './../styles/order-confirmation.css';
 
 const OrderConfirmation = (props) => {
   const numberWithCommas = (number) => {
@@ -28,12 +29,13 @@ const OrderConfirmation = (props) => {
         backgroundImage: `url(${background})`,
         backgroundPosition: 'center',
         backgroundSize: 'contain',
-        backgroundRepeat: 'no-repeat'
+        backgroundRepeat: 'no-repeat',
+        height: '15vw',
       };
       return (
-        <div className="row orderSummaryItemRow" key={element.id}>
-          <div className="col" style={style}></div>
-          <div className="col orderSummaryItem my-auto">
+        <div className="row justify-content-center" key={element.id}>
+          <div className="col-3" style={style}></div>
+          <div className="col-3 my-auto">
             {element.name} <br/>
             ${numberWithCommas(element.price)} <br/>
             Quantity: {element.quantity}
@@ -63,9 +65,9 @@ const OrderConfirmation = (props) => {
   }
 
   return (
-    <div className="container orderSummaryContainer">
-      <div className="row">
-        <div className="col display-4">
+    <div className="container text-center orderSummaryContainer">
+      <div className="row mt-5">
+        <div className="col display-5">
           Order Summary For {props.info.name}
         </div>
       </div>
@@ -85,7 +87,7 @@ const OrderConfirmation = (props) => {
       </div>
       <div className="row">
         <div className="col orderSummaryItemTotal">
-          Shipped To: {props.info.address} {props.info.city} {props.info.state} {props.info.zipcode}
+          Shipped To: {props.info.address} {props.info.city}, {props.info.state} {props.info.zipcode}
         </div>
       </div>
       <div className="row">

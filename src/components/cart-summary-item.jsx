@@ -39,10 +39,10 @@ const CartSummaryItem = (props) => {
         <div className="col-sm-6 productItem" style={style}></div>
         <div className="col-sm-6 text-center">
           <div className="cartProductName">{product.name}</div>
-          <div className="productPrice">${product.price}</div>
+          <div className="cartProductPrice">${product.price}</div>
           <QuantityUpdate increment={increment} decrement={decrement} quantity={quantity}/>
-          <button onClick={() => setModalIsOpen(!modalIsOpen)} className="btn btn-danger">Delete</button>
-          <button onClick={() => props.updateCart(quantity, props.product.productid)} className="btn btn-primary">Update</button>
+          <button onClick={() => setModalIsOpen(!modalIsOpen)} className="btn btn-sm btn-danger me-1">Delete</button>
+          <button onClick={() => props.updateCart(quantity, props.product.productid)} className="btn btn-sm btn-primary">Update</button>
         </div>
       </div>
       <Modal isOpen={modalIsOpen}>

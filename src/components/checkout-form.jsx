@@ -1,10 +1,22 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Button, Modal, ModalBody, ModalFooter } from 'reactstrap';
 import { Link, useNavigate } from 'react-router-dom'; 
+import './../styles/checkout-form.css';
 
 const CheckoutForm = (props) => {
   const [modalIsOpen, setModalIsOpen] = useState(false);
   const navigate = useNavigate();
+
+  useEffect(() => { 
+    props.setInfo({
+      name: null,
+      creditCard: null,
+      address: null,
+      city: null,
+      state: null,
+      zipcode: null
+    });
+  }, []);
 
   const numberWithCommas = (number) => {
     let newNumber = (parseFloat(number)).toFixed(2);
@@ -44,7 +56,7 @@ const CheckoutForm = (props) => {
     <div className="container mt-3 checkout">
       <div className="row">
         <div className="col col-sm-12">
-          <div className="display-4 checkoutTitle">Checkout</div>
+          <div className="display-5 checkoutTitle">Checkout</div>
             Order Total: ${getCartTotal()}
         </div>
       </div>
@@ -69,15 +81,15 @@ const CheckoutForm = (props) => {
         </div>
       </div> <br/>
       <div className="row">
-        <div className="col">
+        <div className="col-6">
           City <br/>
           <input className="form-control" name="city" type="text" onChange={(e) => handleInput(e)}/>
         </div>
-        <div className="col">
+        <div className="col-2">
           State <br/>
           <input className="form-control" name="state" type="text" onChange={(e) => handleInput(e)}/>
         </div>
-        <div className="col">
+        <div className="col-4">
           Zipcode <br/>
           <input className="form-control" name="zipcode" type="number" onChange={(e) => handleInput(e)}/>
         </div>
@@ -88,7 +100,7 @@ const CheckoutForm = (props) => {
         </div>
       </div>
       <div className="row">
-        <div className="col-2 pt-4">
+        <div className="col pt-4">
           <Link to="/catalog">
             <div className='text-secondary'>
               &lt;Continue Shopping

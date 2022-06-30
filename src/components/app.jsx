@@ -6,7 +6,7 @@ import CartSummary from './cart-summary';
 import CheckoutForm from './checkout-form';
 import LandingPage from './landing-page';
 import OrderConfirmation from './order-confirmation';
-import { Routes, Route, Navigate } from "react-router-dom";
+import { Routes, Route } from "react-router-dom";
 
 const App = () => {
   const [products, setProducts] = useState([]);
@@ -35,7 +35,6 @@ const App = () => {
         return response.json();
       })
       .then(myJson => {
-        console.log(myJson);
         setProducts(myJson);
       })
       .catch(error => {
@@ -136,10 +135,7 @@ const App = () => {
     setConfirmationNumber(confirmationNumber);
   }
 
-  let headerElement = <Header           
-                        getCartItems={getCartItems}
-                        cartLength={cartLength}
-                      />
+  let headerElement = <Header cartLength={cartLength}/>
   return(
     <Routes>
       <Route path='/' element={<LandingPage />}>
