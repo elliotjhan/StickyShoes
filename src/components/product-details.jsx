@@ -110,7 +110,9 @@ const ProductDetails = (props) => {
             Product has been added to cart!
           </ModalHeader>
           <ModalFooter>
-            <Button onClick={() => setModalIsOpen(!modalIsOpen)} color="info">Keep Shopping</Button>
+            <Link to="/catalog">
+              <Button onClick={() => setModalIsOpen(!modalIsOpen)} color="info">Keep Shopping</Button>
+            </Link>
             <Link to="/cart">
               <Button color="primary">Go To Cart</Button>
             </Link>

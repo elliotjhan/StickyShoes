@@ -1,9 +1,9 @@
 .cartProductName {
-  font-size: 2.6rem;
+  font-size: 2rem;
 }
 .productItem {
-  height: 30vh;
+  height: 25vh;
 }
-.cartProductName {
-  font-size: 2.6rem;
+.cartProductPrice {
+  font-size: 1.3rem;
 }
