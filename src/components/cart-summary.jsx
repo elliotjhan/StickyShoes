@@ -17,6 +17,10 @@ const CartSummary = (props) => {
     return numberWithCommas(cartTotal);
   }
 
+  const handleCheckout = () => { 
+    props.setOrderSummary(props.cartData);
+  }
+
   if (props.cartData && props.cartData.length > 0) {
     let cartItemArray = props.cartData;
     let cartItemArrayDisplay = null;
@@ -51,7 +55,7 @@ const CartSummary = (props) => {
               <button className="btn btn-info cartShoppingButton me-1">Keep Shopping</button>
             </Link>
             <Link to={'/checkout'}>
-              <button className="btn btn-primary cartCheckoutButton">Checkout</button>
+              <button onClick={() => handleCheckout()} className="btn btn-primary cartCheckoutButton">Checkout</button>
             </Link>
           </div>
         </div>

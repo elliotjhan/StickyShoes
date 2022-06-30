@@ -26,7 +26,7 @@ const CheckoutForm = (props) => {
   const getCartTotal = () => {
     let cartTotal = null;
     props.cartData.forEach(element => {
-      cartTotal += parseFloat(element.price); 
+      cartTotal += (parseFloat(element.price) * element.quantity); 
     });
     return numberWithCommas(cartTotal);
   }
@@ -52,73 +52,95 @@ const CheckoutForm = (props) => {
     }
   }
 
-  return (
-    <div className="container mt-3 checkout">
-      <div className="row">
-        <div className="col col-sm-12">
-          <div className="display-5 checkoutTitle">Checkout</div>
-            Order Total: ${getCartTotal()}
+  if(props.cartData.length > 0) {
+    return (
+      <div className="container mt-3 checkout">
+        <div className="row">
+          <div className="col col-sm-12">
+            <div className="display-5 checkoutTitle">Checkout</div>
+              Order Total: ${getCartTotal()}
+          </div>
         </div>
+        <br/>
+        <br/>
+        <div className="row">
+          <div className="col">
+            Name <br/>
+            <input className="form-control" name="name" type="text" onChange={(e) => handleInput(e)}/>
+          </div>
+        </div> <br/>
+        <div className="row">
+          <div className="col">
+            Credit Card <br/>
+            <input className="form-control" name="creditCard" type="number" onChange={(e) => handleInput(e)}/>
+          </div>
+        </div> <br/>
+        <div className="row">
+          <div className="col">
+            Address <br/>
+            <input className="form-control" name="address" type="text" onChange={(e) => handleInput(e)}/>
+          </div>
+        </div> <br/>
+        <div className="row">
+          <div className="col-6">
+            City <br/>
+            <input className="form-control" name="city" type="text" onChange={(e) => handleInput(e)}/>
+          </div>
+          <div className="col-2">
+            State <br/>
+            <input className="form-control" name="state" type="text" onChange={(e) => handleInput(e)}/>
+          </div>
+          <div className="col-4">
+            Zipcode <br/>
+            <input className="form-control" name="zipcode" type="number" onChange={(e) => handleInput(e)}/>
+          </div>
+        </div> 
+        <div className="row mt-5">
+          <div className="col text-right">
+            <button className="btn btn-primary" onClick={() => handleCheckout()}>Place Order</button>
+          </div>
+        </div>
+        <div className="row">
+          <div className="col pt-4">
+            <Link to="/catalog">
+              <div className='text-secondary'>
+                &lt;Continue Shopping
+              </div>
+            </Link>
+          </div>
+        </div>
+  
+        <Modal isOpen={modalIsOpen}>
+            <ModalBody>
+              Please Ensure All Fields Are Completed
+            </ModalBody>
+            <ModalFooter>
+              <Button onClick={() => setModalIsOpen(!setModalIsOpen)} color="primary">Return</Button>
+            </ModalFooter>
+        </Modal>
       </div>
-      <br/>
-      <br/>
-      <div className="row">
-        <div className="col">
-          Name <br/>
-          <input className="form-control" name="name" type="text" onChange={(e) => handleInput(e)}/>
-        </div>
-      </div> <br/>
-      <div className="row">
-        <div className="col">
-          Credit Card <br/>
-          <input className="form-control" name="creditCard" type="number" onChange={(e) => handleInput(e)}/>
-        </div>
-      </div> <br/>
-      <div className="row">
-        <div className="col">
-          Address <br/>
-          <input className="form-control" name="address" type="text" onChange={(e) => handleInput(e)}/>
-        </div>
-      </div> <br/>
-      <div className="row">
-        <div className="col-6">
-          City <br/>
-          <input className="form-control" name="city" type="text" onChange={(e) => handleInput(e)}/>
-        </div>
-        <div className="col-2">
-          State <br/>
-          <input className="form-control" name="state" type="text" onChange={(e) => handleInput(e)}/>
-        </div>
-        <div className="col-4">
-          Zipcode <br/>
-          <input className="form-control" name="zipcode" type="number" onChange={(e) => handleInput(e)}/>
-        </div>
-      </div> 
-      <div className="row mt-5">
-        <div className="col text-right">
-          <button className="btn btn-primary" onClick={() => handleCheckout()}>Place Order</button>
-        </div>
-      </div>
-      <div className="row">
-        <div className="col pt-4">
-          <Link to="/catalog">
-            <div className='text-secondary'>
-              &lt;Continue Shopping
+    );
+  } else {
+    return (
+      <div className="container mt-3 checkout text-center">
+        <div className="row my-5">
+          <div className="col col-sm-12">
+            <div className="display-5 checkoutTitle">
+              Cart Is Empty
             </div>
-          </Link>
+          </div>
+        </div>
+        <div className="row">
+          <div className="col">
+            <Link to="/catalog">
+              <button className="btn btn-primary">Continue Shopping</button>
+            </Link>
+          </div>
         </div>
       </div>
+    )
+  }
 
-      <Modal isOpen={modalIsOpen}>
-          <ModalBody>
-            Please Ensure All Fields Are Completed
-          </ModalBody>
-          <ModalFooter>
-            <Button onClick={() => setModalIsOpen(!setModalIsOpen)} color="primary">Return</Button>
-          </ModalFooter>
-      </Modal>
-    </div>
-  );
 }
 
 export default CheckoutForm;

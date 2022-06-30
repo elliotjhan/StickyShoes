@@ -13,6 +13,7 @@ const App = () => {
   const [currentProduct, setCurrentProduct] = useState(null);
   const [cartData, setCartData] = useState([]);
   const [cartLength, setCartLength] = useState(0);
+  const [orderSummary, setOrderSummary] = useState([]);
   const [confirmationNumber, setConfirmationNumber] = useState(null);
   const [info, setInfo] = useState({
     name: null,
@@ -170,6 +171,7 @@ const App = () => {
             cartData={cartData}
             cartLength={cartLength}
             getCartItems={getCartItems}
+            setOrderSummary={setOrderSummary}
           />
         </>
       }>
@@ -194,7 +196,8 @@ const App = () => {
             confirmationNumber={confirmationNumber}
             setInfo={setInfo}
             info={info}
-            cartData={cartData}
+            orderSummary={orderSummary}
+            setOrderSummary={setOrderSummary}
             deleteCart={deleteCart}
           />
         </>

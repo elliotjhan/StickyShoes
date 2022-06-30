@@ -35,7 +35,7 @@ const CartSummaryItem = (props) => {
 
   return (
     <div className="container">
-      <div className="row align-items-center">
+      <div className="row">
         <div className="col-sm-6 productItem" style={style}></div>
         <div className="col-sm-6 text-center">
           <div className="cartProductName">{product.name}</div>
