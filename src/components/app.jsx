@@ -29,7 +29,7 @@ const App = () => {
   }, []);
 
   const getProducts = () => {
-    fetch('/products')
+    fetch('/api/products')
       .then(response => {
         return response.json();
       })
@@ -42,7 +42,7 @@ const App = () => {
   }
 
   const getCartItems = () => {
-    fetch('/cart')
+    fetch('/api/cart')
       .then(response => {
         return response.json();
       })
@@ -64,7 +64,7 @@ const App = () => {
   }
 
   const addToCart = (productid, quantity, price) => {
-    fetch('/addtocart', {
+    fetch('/api/addtocart', {
       method: 'POST',
       body: JSON.stringify({
         productid,
@@ -84,7 +84,7 @@ const App = () => {
   }
 
   const updateCart = (quantity, productid) => {
-    fetch('/updatecart', {
+    fetch('/api/updatecart', {
       method: 'PUT',
       body: JSON.stringify({
         quantity,
@@ -103,7 +103,7 @@ const App = () => {
   }
 
   const deleteCart = (cartId) => {
-    fetch('/deletecart', {
+    fetch('/api/deletecart', {
       method: 'DELETE',
       body: JSON.stringify({
         cartId: parseInt(cartId)
