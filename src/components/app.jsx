@@ -122,70 +122,72 @@ const App = () => {
 
   let headerElement = <Header cartLength={cartLength}/>
   return(
-    <Routes>
-      <Route path='/' element={<LandingPage />}>
-      </Route>
-      <Route path='/catalog' element={
-        <>
-          {headerElement}
-          <ProductList 
-            productList={products}
-            setCurrentProduct={setCurrentProduct}
-          />
-        </>
-      }>
-      </Route>
-      <Route path='/catalog/details' element={
-        <>
-          {headerElement}
-          <ProductDetails 
-            getCartItems={getCartItems}
-            addToCart={addToCart}
-            currentProduct={currentProduct}
-            productList={products}
-          />
-        </>
-      }>
-      </Route>
-      <Route path='/cart' element={
-        <>
-          {headerElement}
-          <CartSummary
-            updateCart={updateCart}
-            cartData={cartData}
-            cartLength={cartLength}
-            getCartItems={getCartItems}
-            setOrderSummary={setOrderSummary}
-          />
-        </>
-      }>
-      </Route>
-      <Route path='/checkout' element={
-        <>
-          {headerElement}
-          <CheckoutForm
-            cartData={cartData}
-            getCartItems={getCartItems}
-            info={info}
-            setInfo={setInfo}
-          />
-        </>
-      }>
-      </Route>
-      <Route path='/confirmation' element={
-        <>
-          {headerElement}
-          <OrderConfirmation
-            setInfo={setInfo}
-            info={info}
-            orderSummary={orderSummary}
-            setOrderSummary={setOrderSummary}
-            deleteCart={deleteCart}
-          />
-        </>
-      }>
-      </Route>
-    </Routes>
+    <div className="container-fluid">
+      <Routes>
+        <Route path='/' element={<LandingPage />}>
+        </Route>
+        <Route path='/catalog' element={
+          <>
+            {headerElement}
+            <ProductList 
+              productList={products}
+              setCurrentProduct={setCurrentProduct}
+            />
+          </>
+        }>
+        </Route>
+        <Route path='/catalog/details' element={
+          <>
+            {headerElement}
+            <ProductDetails 
+              getCartItems={getCartItems}
+              addToCart={addToCart}
+              currentProduct={currentProduct}
+              productList={products}
+            />
+          </>
+        }>
+        </Route>
+        <Route path='/cart' element={
+          <>
+            {headerElement}
+            <CartSummary
+              updateCart={updateCart}
+              cartData={cartData}
+              cartLength={cartLength}
+              getCartItems={getCartItems}
+              setOrderSummary={setOrderSummary}
+            />
+          </>
+        }>
+        </Route>
+        <Route path='/checkout' element={
+          <>
+            {headerElement}
+            <CheckoutForm
+              cartData={cartData}
+              getCartItems={getCartItems}
+              info={info}
+              setInfo={setInfo}
+            />
+          </>
+        }>
+        </Route>
+        <Route path='/confirmation' element={
+          <>
+            {headerElement}
+            <OrderConfirmation
+              setInfo={setInfo}
+              info={info}
+              orderSummary={orderSummary}
+              setOrderSummary={setOrderSummary}
+              deleteCart={deleteCart}
+            />
+          </>
+        }>
+        </Route>
+      </Routes>
+    </div>
   )
 }
 

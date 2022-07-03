@@ -19,10 +19,16 @@ const ProductList = (props) => {
   });
 
   return (
-    <div className="catalogBody container-fluid">
-      <div className="row banner mb-1"></div>
-      <div className="row justify-content-center productListContainer">{eachProductList}</div>
-    </div>
+    <React.Fragment>
+      <div className="row banner">
+        <div className="col-1"></div>
+        <div className="col-3 bannerTextContainer">
+          <div className="bannerTitleText">SPECIALIZED CLIMBING</div>
+          <div className="bannerText">Check out our specialized performance shoes that will help you send!</div>
+        </div>
+      </div>
+      <div className="row justify-content-center">{eachProductList}</div>
+    </React.Fragment>
   );
 }
 
