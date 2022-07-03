@@ -4,8 +4,3 @@
 .carousel .slide {
   background: transparent!important;
 }
-.catalogItem {
-  background-color: #f1f1f1;
-  border: 5px solid rgb(26, 26, 26);
-  border-radius: 7px;
-}

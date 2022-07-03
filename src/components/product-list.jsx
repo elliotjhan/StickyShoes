@@ -28,7 +28,7 @@ const ProductList = (props) => {
           </div>
         </div>
       </div>
-      <div className="row justify-content-center">{eachProductList}</div>
+      <div className="row justify-content-evenly">{eachProductList}</div>
     </React.Fragment>
   );
 }
