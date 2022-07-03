@@ -14,13 +14,13 @@ Navigate the site and choose your favorite shoes to purchase.
 
 1. Fork this repo and clone from the terminal.
 
-   $ git clone https://github.com/elliotjhan/stickyshoes
+   $ git clone https://github.com/elliotjhan/sticky-shoes
 
-2. Navigate into cloned directory and be on the main branch
+2. Navigate into cloned directory main branch and install dependencies
 
    $ npm install
 
-3. Create a database with your own server and import the sql file
+3. Create a database with your own server, preferably PostgreSQL and import the sql file
 
 4. Initiate the dev server
 
@@ -38,6 +38,7 @@ Navigate the site and choose your favorite shoes to purchase.
 6. Express
 7. PostgreSQL
 8. Webpack
+9. React Router
 
 # Contributing
 
