@@ -20,11 +20,11 @@
 .headerCartContainer {
 }
 .shoppingCart {
-  background-image: url(./../assets/images/cart.png);
+  /* background-image: url(./../assets/images/cart.png);
   background-size: contain;
   background-repeat: no-repeat;
   background-position: center;
-  height: 40px;
+  height: 40px; */
 }
 .cartLength {
   color: white;

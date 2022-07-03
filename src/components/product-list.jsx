@@ -21,10 +21,11 @@ const ProductList = (props) => {
   return (
     <React.Fragment>
       <div className="row banner">
-        <div className="col-1"></div>
-        <div className="col-3 bannerTextContainer">
-          <div className="bannerTitleText">SPECIALIZED CLIMBING</div>
-          <div className="bannerText">Check out our specialized performance shoes that will help you send!</div>
+        <div className="layer">
+          <div className="bannerTextContainer">
+            <div className="bannerTitleText">SPECIALIZED CLIMBING</div>
+            <div className="bannerText">Check out our specialized performance shoes that will help you send!</div>
+          </div>
         </div>
       </div>
       <div className="row justify-content-center">{eachProductList}</div>

@@ -21,9 +21,9 @@ const Header = (props) => {
             </div>
           </Link>
         </div>
-        <div className="col-1 text-left">
+        <div className="col-1">
           <div className="cartLength">
-            {props.cartLength}
+            Cart ({props.cartLength})
           </div>
         </div>
       </div>
