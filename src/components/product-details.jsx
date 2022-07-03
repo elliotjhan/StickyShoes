@@ -2,8 +2,8 @@ import React, { useState, useEffect } from 'react';
 import Quantity from './quantity';
 import 'react-responsive-carousel/lib/styles/carousel.min.css';
 import { Carousel } from 'react-responsive-carousel';
-import { Button, Modal, ModalHeader, ModalBody, ModalFooter } from 'reactstrap';
-import { Link, Navigate } from 'react-router-dom'; 
+import { Button, Modal, ModalHeader, ModalFooter } from 'reactstrap';
+import { Link } from 'react-router-dom'; 
 import './../styles/product-details.css';
 import Cookies from 'js-cookie';
 

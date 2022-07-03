@@ -3,7 +3,6 @@ import ProductListItem from './product-list-item';
 import './../styles/product-list.css';
 import Cookies from 'js-cookie';
 
-
 const ProductList = (props) => {
   useEffect(() => { 
     Cookies.remove('currentProduct');
