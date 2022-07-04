@@ -5,26 +5,26 @@ import { Link } from 'react-router-dom';
 const Header = (props) => {
   return (
       <div className="row align-items-center justify-content-between headerContainer">
-        <div className="col-1 text-right headerTitleContainer">
+        <div className="col-1 pe-0 text-right headerTitleContainer">
             <Link to={'/'}>
-              <div className="headerIcon align-middle" />
+              <div className="headerIcon" />
             </Link>
         </div>
-        <div className="col-9 text-left">
-          <div className="headerTitle">
-            Sticky Shoes
-          </div>
-        </div>
-        <div className="col-1 text-right headerCartContainer">
-          <Link to={'/cart'}>
-            <div className="cursor text-white shoppingCart">
-            </div>
+        <div className="col-9 ps-0 text-left">
+          <Link style={{textDecoration: 'none'}} to={'/'}>
+            <span className="headerTitle">
+              Sticky Shoes
+            </span>
           </Link>
         </div>
         <div className="col-1">
-          <div className="cartLength">
-            Cart ({props.cartLength})
-          </div>
+        </div>
+        <div className="col-1 text-center">
+          <Link style={{textDecoration: 'none'}} to={'/cart'}>
+            <div className="cartLength">
+              Cart ({props.cartLength})
+            </div>
+          </Link>
         </div>
       </div>
   );

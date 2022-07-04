@@ -39,8 +39,8 @@ const CartSummary = (props) => {
 
     return (
       <div className="container cartContainer">
-        <Link to={'/catalog'}>
-          <div className="cursor row text-secondary pt-2 ps-2">&lt;Back to Catalog</div><br/>
+        <Link to={'/'}>
+          <div className="cursor row text-secondary pt-2 ps-2">&lt;Keep Shopping</div><br/>
         </Link>
         <div className="row">
           <div className="col cartSummary">Cart Summary:</div>
@@ -51,7 +51,7 @@ const CartSummary = (props) => {
         <div className="row align-items-center">
           <div className="col cartSubtotal">Subtotal ({props.cartLength} items): ${getCartTotal()}</div>
           <div className="col text-center">
-            <Link to={'/catalog'}>
+            <Link to={'/'}>
               <button className="btn btn-info cartShoppingButton me-1">Keep Shopping</button>
             </Link>
             <Link to={'/checkout'}>
@@ -64,9 +64,9 @@ const CartSummary = (props) => {
     );
   } else {
     return (
-      <div className="container">
-        <Link to={'/catalog'}>
-          <div className="cursor row text-secondary">&lt;Back to Catalog</div><br/>  
+      <div className="container cartContainer">
+        <Link to={'/'}>
+          <div className="cursor row text-secondary">&lt;Keep Shopping</div><br/>  
         </Link>
         <div className="row display-4">Cart Is Empty</div>
       </div>

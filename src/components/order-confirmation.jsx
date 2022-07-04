@@ -109,8 +109,8 @@ const OrderConfirmation = (props) => {
         <br/>
         <div className="row">
           <div className="col">
-            <Link to="/catalog">
-              <button onClick={() => handleBackToCatalog()} className="btn btn-primary">Back To Catalog</button>
+            <Link to="/">
+              <button onClick={() => handleBackToCatalog()} className="btn btn-primary">Home</button>
             </Link>
           </div>
         </div>

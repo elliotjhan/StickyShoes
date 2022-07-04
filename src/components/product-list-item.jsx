@@ -24,7 +24,7 @@ const ProductListItem  = (props) => {
 
   return (
     <div className="col-lg-3 m-5 col-sm-12 catalogItem p-0 text-center">
-      <Link style={{textDecoration: 'none', color: 'black'}} to={'/catalog/details'}>
+      <Link style={{textDecoration: 'none', color: 'black'}} to={'/details'}>
         <div onClick={() => setViewCallback()} className="text-center card border-0">
           <div className="productImage card-img-top" style={style}>
           </div>

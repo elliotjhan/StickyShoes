@@ -4,7 +4,6 @@
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
-  font-family: 'Montserrat', sans-serif;
 }
 .catalogBody {
   background-color: black;
@@ -16,7 +15,7 @@
   color: white;
 }
 .bannerText {
-  font-size: 2vh;
+  font-size: 1.9vh;
   color: white;
 }
 .bannerTextContainer {

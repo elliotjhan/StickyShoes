@@ -69,9 +69,9 @@ const ProductDetails = (props) => {
   if (product) {
     return (
       <div className="container p-3 mt-4">
-        <Link to="/catalog">
+        <Link to="/">
           <div className="cursor row mb-4">
-            <div className="col text-dark">&lt;Back to catalog</div>
+            <div className="col text-dark">&lt;Keep Shopping</div>
           </div>
         </Link>
         <div className="row mt-4">
@@ -96,8 +96,8 @@ const ProductDetails = (props) => {
               decrement={decrement}
               quantity={quantity}
             />
-            <Link to="/catalog">
-              <button className="btn btn-info mr-3">Back To Catalog</button>
+            <Link to="/">
+              <button className="btn btn-info mr-3">Keep Shopping</button>
             </Link>
             <button className="btn btn-primary" onClick={() => addToCart()}>Add To Cart</button>
           </div>
@@ -110,7 +110,7 @@ const ProductDetails = (props) => {
             Product has been added to cart!
           </ModalHeader>
           <ModalFooter>
-            <Link to="/catalog">
+            <Link to="/">
               <Button onClick={() => setModalIsOpen(!modalIsOpen)} color="info">Keep Shopping</Button>
             </Link>
             <Link to="/cart">

@@ -15,15 +15,6 @@
   font-size: 3vh;
   font-weight: 400;
 }
-.headerCartContainer {
-}
-.shoppingCart {
-  /* background-image: url(./../assets/images/cart.png);
-  background-size: contain;
-  background-repeat: no-repeat;
-  background-position: center;
-  height: 40px; */
-}
 .cartLength {
   color: rgb(0, 0, 0);
   font-size: 1.2rem;

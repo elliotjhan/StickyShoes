@@ -4,9 +4,10 @@ import ProductList from './product-list';
 import ProductDetails from './product-details';
 import CartSummary from './cart-summary';
 import CheckoutForm from './checkout-form';
-import LandingPage from './landing-page';
+import Footer from './footer';
 import OrderConfirmation from './order-confirmation';
 import { Routes, Route } from "react-router-dom";
+import './../styles/app.css';
 
 const App = () => {
   const [products, setProducts] = useState([]);
@@ -121,22 +122,24 @@ const App = () => {
   }
 
   let headerElement = <Header cartLength={cartLength}/>
+  let footerElement = <Footer />
   return(
-    <div className="container-fluid">
+    <div className="container-fluid main">
       <Routes>
-        <Route path='/' element={<LandingPage />}>
-        </Route>
-        <Route path='/catalog' element={
+        {/* <Route path='/' element={<LandingPage />}>
+        </Route> */}
+        <Route path='/' element={
           <>
             {headerElement}
             <ProductList 
               productList={products}
               setCurrentProduct={setCurrentProduct}
             />
+            {footerElement}
           </>
         }>
         </Route>
-        <Route path='/catalog/details' element={
+        <Route path='/details' element={
           <>
             {headerElement}
             <ProductDetails 
@@ -145,6 +148,7 @@ const App = () => {
               currentProduct={currentProduct}
               productList={products}
             />
+            {footerElement}
           </>
         }>
         </Route>
@@ -158,6 +162,7 @@ const App = () => {
               getCartItems={getCartItems}
               setOrderSummary={setOrderSummary}
             />
+            {footerElement}
           </>
         }>
         </Route>
@@ -170,6 +175,7 @@ const App = () => {
               info={info}
               setInfo={setInfo}
             />
+            {footerElement}
           </>
         }>
         </Route>
@@ -183,6 +189,7 @@ const App = () => {
               setOrderSummary={setOrderSummary}
               deleteCart={deleteCart}
             />
+            {footerElement}
           </>
         }>
         </Route>

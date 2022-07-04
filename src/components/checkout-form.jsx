@@ -132,8 +132,8 @@ const CheckoutForm = (props) => {
         </div>
         <div className="row">
           <div className="col">
-            <Link to="/catalog">
-              <button className="btn btn-primary">Continue Shopping</button>
+            <Link to="/">
+              <button className="btn btn-primary">Keep Shopping</button>
             </Link>
           </div>
         </div>
