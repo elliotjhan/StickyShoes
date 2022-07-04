@@ -68,43 +68,48 @@ const ProductDetails = (props) => {
 
   if (product) {
     return (
-      <div className="container p-3 mt-4">
-        <Link to="/">
-          <div className="cursor row mb-4">
-            <div className="col text-dark">&lt;Keep Shopping</div>
-          </div>
-        </Link>
-        <div className="row mt-4">
-          <div className="col-lg-6">
-            <Carousel
-              showThumbs={false}
-              showStatus={false}
-              autoPlay={true}
-              width="30vw"
-              interval={2500}
-              infiniteLoop={true}
-              stopOnHover={true}>
-              {renderProductImageCarousel()}
-            </Carousel>
-          </div>
-          <div className="text-center col-lg-6 mt-3">
-            <div className="display-3 productDetailsName">{product.name}</div><br/>
-            <h3 className="font-weight-bold">${numberWithCommas(product.price)}</h3><br/>
-            <div className="font-italic">{product.description}</div><br/>
-            <Quantity 
-              increment={increment}
-              decrement={decrement}
-              quantity={quantity}
-            />
-            <Link to="/">
-              <button className="btn btn-info mr-3">Keep Shopping</button>
-            </Link>
-            <button className="btn btn-primary" onClick={() => addToCart()}>Add To Cart</button>
-          </div>
+      <React.Fragment>
+      <div className="row">
+        <div className="col">
+          <Link style={{textDecoration: 'none', color: 'black'}} to="/">
+              <span className="cursor">
+                &lt;Keep Shopping
+              </span>
+          </Link>
         </div>
-        <div className="row mt-4">
-          <div className="col">{product.description}</div>
+      </div>
+      <div className="row align-items-center justify-content-center">
+        <div className="col-6">
+          <Carousel
+            showThumbs={false}
+            showStatus={false}
+            autoPlay={true}
+            width="30vw"
+            margin='auto'
+            interval={2500}
+            infiniteLoop={true}
+            stopOnHover={true}>
+            {renderProductImageCarousel()}
+          </Carousel>
         </div>
+        <div className="col-6">
+          <div className="display-3 productDetailsName">{product.name}</div><br/>
+          <h3 className="font-weight-bold">${numberWithCommas(product.price)}</h3><br/>
+          <div className="font-italic">{product.description}</div><br/>
+          <Quantity 
+            increment={increment}
+            decrement={decrement}
+            quantity={quantity}
+          />
+          <Link to="/">
+            <button className="btn btn-info mr-3">Keep Shopping</button>
+          </Link>
+          <button className="btn btn-primary" onClick={() => addToCart()}>Add To Cart</button>
+        </div>
+      </div>
+      <div className="row">
+        <div className="col">{product.description}</div>
+      </div>
         <Modal isOpen={modalIsOpen}>
           <ModalHeader>
             Product has been added to cart!
@@ -118,7 +123,8 @@ const ProductDetails = (props) => {
             </Link>
           </ModalFooter>
         </Modal>
-      </div>
+      
+      </React.Fragment>
     );
   } 
 }
