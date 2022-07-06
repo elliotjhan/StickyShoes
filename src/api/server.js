@@ -30,14 +30,14 @@ const server = app.listen(3003, "localhost", () => {
 
 app.use(
   session({
-    secret: connection.sessionkey,
+    secret: functions.sessionkey,
     resave: false,
     saveUninitialized: true,
   })
 );
 
 async function getProducts() {
-  const pool = new Pool(connection.credentials);
+  const pool = new Pool(functions.credentials);
   const text = `
     SELECT shoes.productid, shoes.name, shoes.description, shoes.price, shoes.image,
     array_agg(images.image) AS carousel
@@ -61,7 +61,7 @@ app.get("/products", (req, res, next) => {
 });
 
 async function addCart(productid, quantity, price, cartid) {
-  const pool = new Pool(connection.credentials);
+  const pool = new Pool(functions.credentials);
   const text = `
     INSERT INTO cart (quantity, productid, price, cartid) 
     VALUES (${quantity}, ${productid}, ${price}, ${cartid})
@@ -83,7 +83,7 @@ app.post("/addtocart", (req, res) => {
 });
 
 async function getCart(cartid) {
-  const pool = new Pool(connection.credentials);
+  const pool = new Pool(functions.credentials);
   const text = `
     SELECT * FROM cart 
     INNER JOIN shoes ON cart.productid = shoes.productid
@@ -105,7 +105,7 @@ app.get("/cart", (req, res) => {
 });
 
 async function updateCart(quantity, cartid, productid) {
-  const pool = new Pool(connection.credentials);
+  const pool = new Pool(functions.credentials);
   let text;
   if (quantity > 0) {
     text = `
@@ -130,7 +130,7 @@ app.put("/updatecart", (req, res) => {
 });
 
 async function deleteCart(cartid) {
-  const pool = new Pool(connection.credentials);
+  const pool = new Pool(functions.credentials);
   const text = `DELETE FROM cart WHERE cartid = ${cartid}`;
   await pool.query(text);
   await pool.end();

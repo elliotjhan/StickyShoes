@@ -1,11 +1,33 @@
 .banner {
-  height: 72vh;
-  display: block;
-  background-image: url(./../assets/images/banner2.jpg);
+  height: 91vh;
+  background-image: url(./../assets/images/yosemite-banner.jpeg);
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
 }
 .catalogBody {
   background-color: black;
+}
+.bannerTitleText {
+  font-size: 6.4vh;
+  line-height: 1;
+  font-weight: 400;
+  color: white;
+}
+.bannerText {
+  font-size: 1.9vh;
+  color: white;
+}
+.bannerTextContainer {
+  padding-top: 20vh;
+  padding-left: 10vw;
+  width: 30vw;
+}
+.layer {
+  background-color: rgba(0, 0, 0, 0.345);
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100vw;
+  height: 91vh;
 }

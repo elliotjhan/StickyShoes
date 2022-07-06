@@ -1,45 +1,27 @@
-@import url('https://fonts.googleapis.com/css?family=Expletus+Sans:500,600,700&display=swap');
-
 .headerContainer {
-  background-image: linear-gradient(to right, rgb(17, 17, 17), rgb(41, 41, 41));
+  background-color: white;
+  height: 9vh;
 }
 .headerIcon {
-  background-image: url(./../assets/images/mountain_logo3.png);
-  height: 100px;
-  width: 170px;
+  background-image: url(./../assets/images/icons8-mountain-96.png);
+  height: 5vh;
   background-size: contain;
   background-position: center;
   background-repeat: no-repeat;
   background-color: transparent;
-  display: inline-block;
-  margin-bottom: 2vh;
 }
 .headerTitle {
-  font-family: 'Expletus Sans', cursive;
-  color: white;
+  color: rgb(0, 0, 0);
+  font-size: 3vh;
+  font-weight: 400;
 }
-.headerCartContainer {
-  position: relative;
-}
-.shoppingCart {
-  background-image: url(./../assets/images/cart.png);
-  background-size: contain;
-  background-repeat: no-repeat;
-  background-position: center;
-  height: 10vh;
-  width: 5vw;
-  position: absolute;
-  right: 0;
-  top: 0;
-  margin-right: 4vw;
-  margin-top: 2vh;
+.headerTitle:hover {
+  color: #545454;
 }
 .cartLength {
-  color: white;
+  color: rgb(0, 0, 0);
   font-size: 1.2rem;
-  margin-top: 2.9vh;
-  margin-left: 2.5vw;
 }
-.headerCartContainer {
-  position: relative;
+.cartLength:hover {
+  color:#545454
 }

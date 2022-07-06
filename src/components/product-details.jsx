@@ -38,17 +38,16 @@ const ProductDetails = (props) => {
     setModalIsOpen(!modalIsOpen);
   }
 
-  const numberWithCommas = (number) => { // regex method to put in commas at thousands places
-    let newNumber = (parseFloat(number)).toFixed(2);
-    return newNumber.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',');
-  }
-
   const increment = () => {
     setQuantity(quantity + 1);
   }
 
   const decrement = () => {
-    setQuantity(quantity - 1);
+    if (quantity < 2) {
+      setQuantity(1);
+    } else {
+      setQuantity(quantity - 1);
+    }
   }
 
   const renderProductImageCarousel = () => {
@@ -68,57 +67,61 @@ const ProductDetails = (props) => {
 
   if (product) {
     return (
-      <div className="container p-3 catalogItem mt-4">
-        <Link to="/catalog">
-          <div className="cursor row mb-4">
-            <div className="col text-dark">&lt;Back to catalog</div>
-          </div>
-        </Link>
-        <div className="row mt-4">
-          <div className="col-lg-6">
-            <Carousel
-              showThumbs={false}
-              showStatus={false}
-              autoPlay={true}
-              width="30vw"
-              interval={2500}
-              infiniteLoop={true}
-              stopOnHover={true}>
-              {renderProductImageCarousel()}
-            </Carousel>
-          </div>
-          <div className="text-center col-lg-6 mt-3">
-            <div className="display-3 productDetailsName">{product.name}</div><br/>
-            <h3 className="font-weight-bold">${numberWithCommas(product.price)}</h3><br/>
-            <div className="font-italic">{product.description}</div><br/>
-            <Quantity 
-              increment={increment}
-              decrement={decrement}
-              quantity={quantity}
-            />
-            <Link to="/catalog">
-              <button className="btn btn-info mr-3">Back To Catalog</button>
-            </Link>
-            <button className="btn btn-primary" onClick={() => addToCart()}>Add To Cart</button>
-          </div>
+      <React.Fragment>
+      <div className="row align-items-center justify-content-center productDetailsContainer">
+        <div className="col-6">
+          <Carousel
+            showThumbs={false}s
+            showStatus={false}
+            autoPlay={true}
+            width="30vw"
+            interval={2500}
+            infiniteLoop={true}
+            stopOnHover={true}>
+            {renderProductImageCarousel()}
+          </Carousel>
         </div>
-        <div className="row mt-4">
-          <div className="col">{product.description}</div>
+        <div className="col-6">
+          <div className="productDetailsName">{product.name}</div><br/>
+          <div className="productDetailsPrice">${props.numberWithCommas(product.price)}</div><br/>
+          <div className="productDetailsDescription">{product.description}</div><br/>
+          <div className="row align-items-center text-start">
+            <div className="col-2">
+              <Quantity 
+                increment={increment}
+                decrement={decrement}
+                quantity={quantity}
+              />
+            </div>
+            <div className="col-3">
+              <button className="cartButton" onClick={() => addToCart()}>Add To Cart</button>
+            </div>
+          </div>
+          <div className="row keepShoppingContainer">
+            <div className="col">
+              <Link style={{textDecoration: 'none', color: '#000000'}} to="/">
+                <span className="cursor keepShopping">
+                  &lt;Keep Shopping
+                </span>
+              </Link>
+            </div>
+          </div>
         </div>
         <Modal isOpen={modalIsOpen}>
           <ModalHeader>
-            Product has been added to cart!
+            Product has been added to cart
           </ModalHeader>
           <ModalFooter>
-            <Link to="/catalog">
-              <Button onClick={() => setModalIsOpen(!modalIsOpen)} color="info">Keep Shopping</Button>
+            <Link style={{textDecoration: 'none', color: '#000000'}} to="/">
+              <span className="keepShopping" onClick={() => setModalIsOpen(!modalIsOpen)}>&lt;Keep Shopping</span>
             </Link>
             <Link to="/cart">
-              <Button color="primary">Go To Cart</Button>
+              <button className="cartButton ms-3">Go To Cart</button>
             </Link>
           </ModalFooter>
         </Modal>
       </div>
+      </React.Fragment>
     );
   } 
 }

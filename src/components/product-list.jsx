@@ -14,15 +14,23 @@ const ProductList = (props) => {
         key={element.productid} 
         setCurrentProduct={props.setCurrentProduct} 
         product={element}
+        numberWithCommas={props.numberWithCommas}
       />
     );
   });
 
   return (
-    <div className="catalogBody container-fluid">
-      <div className="row banner mb-1"></div>
-      <div className="row justify-content-center productListContainer">{eachProductList}</div>
-    </div>
+    <React.Fragment>
+      <div className="row banner">
+        <div className="layer">
+          <div className="bannerTextContainer">
+            <div className="bannerTitleText">SPECIALIZED CLIMBING</div>
+            <div className="bannerText">Check out our specialized performance shoes that will help you send!</div>
+          </div>
+        </div>
+      </div>
+      <div className="row justify-content-evenly">{eachProductList}</div>
+    </React.Fragment>
   );
 }
 

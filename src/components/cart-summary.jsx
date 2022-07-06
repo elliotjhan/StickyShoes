@@ -4,17 +4,12 @@ import { Link } from 'react-router-dom';
 import './../styles/cart-summary.css';
 
 const CartSummary = (props) => {
-  const numberWithCommas = (number) => {
-    let newNumber = (parseFloat(number)).toFixed(2);
-    return newNumber.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',');
-  }
-
   const getCartTotal = () => {
     let cartTotal = 0;
     props.cartData.forEach(element => {
       cartTotal += parseFloat(element.price * element.quantity);
     });
-    return numberWithCommas(cartTotal);
+    return props.numberWithCommas(cartTotal);
   }
 
   const handleCheckout = () => { 
@@ -33,42 +28,50 @@ const CartSummary = (props) => {
           deleteFromCart={props.deleteFromCart}
           key={element.id}
           product={element} 
+          numberWithCommas={props.numberWithCommas}
         />
       ) 
     });
 
     return (
-      <div className="container cartContainer">
-        <Link to={'/catalog'}>
-          <div className="cursor row text-secondary pt-2 ps-2">&lt;Back to Catalog</div><br/>
-        </Link>
-        <div className="row">
-          <div className="col cartSummary">Cart Summary:</div>
+      <React.Fragment>
+        <div className="row justify-content-center cartSummary">
+          <div className="col-10">Cart</div>
         </div>
-        <div>
-          {cartItemArrayDisplay}
-        </div>
-        <div className="row align-items-center">
-          <div className="col cartSubtotal">Subtotal ({props.cartLength} items): ${getCartTotal()}</div>
-          <div className="col text-center">
-            <Link to={'/catalog'}>
-              <button className="btn btn-info cartShoppingButton me-1">Keep Shopping</button>
+        {cartItemArrayDisplay}
+        <div className="row justify-content-start align-items-center cartFooter">
+          <div className="col-1"></div>
+          <div className="col-5 cartSubtotal">Subtotal ({props.cartLength} items): ${getCartTotal()}</div>
+          <div className="col-2">
+            <Link style={{textDecoration: 'none', color: 'black'}} to={'/'}>
+              <span className="cursor row keepShopping">&lt;Keep Shopping</span>
             </Link>
+          </div>
+          <div className="col-3 text-center">
             <Link to={'/checkout'}>
-              <button onClick={() => handleCheckout()} className="btn btn-primary cartCheckoutButton">Checkout</button>
+              <button onClick={() => handleCheckout()} className="cartCheckoutButton">Checkout</button>
             </Link>
           </div>
         </div>
-        <br/>
-      </div>
+      </React.Fragment>
     );
   } else {
     return (
-      <div className="container">
-        <Link to={'/catalog'}>
-          <div className="cursor row text-secondary">&lt;Back to Catalog</div><br/>  
-        </Link>
-        <div className="row display-4">Cart Is Empty</div>
+      <div className="cartContainerEmpty">
+        <div className="row cartSummary">
+          <div className="col-1"></div>
+          <div className="col-11">
+            Cart Is Empty
+          </div>
+        </div>
+        <div className="row">
+          <div className="col-1"></div>
+          <div className="col-11">
+            <Link style={{textDecoration: 'none', color: 'black'}} to={'/'}>
+              <span className="keepShopping">&lt;Keep Shopping</span>  
+            </Link>
+          </div>
+        </div>
       </div>
     );
   }

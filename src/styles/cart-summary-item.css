@@ -1,9 +1,20 @@
 .cartProductName {
-  font-size: 2rem;
+  font-size: 1.8vw;
+  padding-bottom: 10px;
 }
 .productItem {
-  height: 25vh;
+  height: 33vh;
 }
 .cartProductPrice {
-  font-size: 1.3rem;
+  font-size: 1.2vw;
+  padding-bottom: 10px;
+}
+.updateButton {
+  border: 1px black solid;
+  background-color: transparent;
+  font-size: .8vw;
+  padding: 3px 10px;
+}
+.updateButton:hover {
+  color: #7f7f7f;
 }
