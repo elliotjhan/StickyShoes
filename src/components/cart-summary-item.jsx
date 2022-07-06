@@ -1,11 +1,9 @@
 import React, { useState, useEffect } from 'react';
 import QuantityUpdate from './quantityUpdate';
-import { Button, Modal, ModalBody, ModalFooter } from 'reactstrap';
 import './../styles/cart-summary-item.css';
 
 const CartSummaryItem = (props) => {
   const [quantity, setQuantity] = useState(0);
-  const [modalIsOpen, setModalIsOpen] = useState(false);
 
   useEffect(() => {
     setQuantity(props.quantity);
@@ -38,7 +36,7 @@ const CartSummaryItem = (props) => {
       <div className="col-sm-6 productItem" style={style}></div>
       <div className="col-sm-6">
         <div className="cartProductName">{product.name}</div>
-        <div className="cartProductPrice">${product.price}</div>
+        <div className="cartProductPrice">${props.numberWithCommas(product.price)}</div>
         <div className="row align-items-center">
           <div className="col-3">
             <QuantityUpdate increment={increment} decrement={decrement} quantity={quantity}/>
@@ -48,16 +46,6 @@ const CartSummaryItem = (props) => {
           </div>
         </div>
       </div>
-
-      {/* <Modal isOpen={modalIsOpen}>
-        <ModalBody>
-            Are you sure you want to delete {product.name}?
-        </ModalBody>
-        <ModalFooter>
-          <Button onClick={() => setModalIsOpen(!modalIsOpen)}>No</Button>
-          <Button onClick={() => props.updateCart(0, props.product.productid)} color="primary">Yes</Button>
-        </ModalFooter>
-      </Modal> */}
     </div>
   );
 }

@@ -38,11 +38,6 @@ const ProductDetails = (props) => {
     setModalIsOpen(!modalIsOpen);
   }
 
-  const numberWithCommas = (number) => { // regex method to put in commas at thousands places
-    let newNumber = (parseFloat(number)).toFixed(2);
-    return newNumber.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',');
-  }
-
   const increment = () => {
     setQuantity(quantity + 1);
   }
@@ -59,7 +54,6 @@ const ProductDetails = (props) => {
     let imageArray = product.carousel;
     if(product.carousel) {
       let carousel = imageArray.map(element => {
-        //let url = require(`./../assets/images/${element}`);
         let url = require(`./../assets/images/${element}`);
         return (
           <div key={imageArray.indexOf(element)}>
@@ -89,7 +83,7 @@ const ProductDetails = (props) => {
         </div>
         <div className="col-6">
           <div className="productDetailsName">{product.name}</div><br/>
-          <div className="productDetailsPrice">${numberWithCommas(product.price)}</div><br/>
+          <div className="productDetailsPrice">${props.numberWithCommas(product.price)}</div><br/>
           <div className="productDetailsDescription">{product.description}</div><br/>
           <div className="row align-items-center text-start">
             <div className="col-2">
@@ -115,14 +109,14 @@ const ProductDetails = (props) => {
         </div>
         <Modal isOpen={modalIsOpen}>
           <ModalHeader>
-            Product has been added to cart!
+            Product has been added to cart
           </ModalHeader>
           <ModalFooter>
-            <Link to="/">
-              <Button onClick={() => setModalIsOpen(!modalIsOpen)} color="info">Keep Shopping</Button>
+            <Link style={{textDecoration: 'none', color: '#000000'}} to="/">
+              <span className="keepShopping" onClick={() => setModalIsOpen(!modalIsOpen)}>&lt;Keep Shopping</span>
             </Link>
             <Link to="/cart">
-              <Button color="primary">Go To Cart</Button>
+              <button className="cartButton ms-3">Go To Cart</button>
             </Link>
           </ModalFooter>
         </Modal>

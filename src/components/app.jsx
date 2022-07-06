@@ -29,6 +29,11 @@ const App = () => {
     getCartItems();
   }, []);
 
+  const numberWithCommas = (number) => {
+    let newNumber = (parseFloat(number)).toFixed(2);
+    return newNumber.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',');
+  }
+
   const getProducts = () => {
     fetch('/api/products')
       .then(response => {
@@ -134,6 +139,7 @@ const App = () => {
             <ProductList 
               productList={products}
               setCurrentProduct={setCurrentProduct}
+              numberWithCommas={numberWithCommas}
             />
             {footerElement}
           </>
@@ -147,6 +153,7 @@ const App = () => {
               addToCart={addToCart}
               currentProduct={currentProduct}
               productList={products}
+              numberWithCommas={numberWithCommas}
             />
             {footerElement}
           </>
@@ -161,6 +168,7 @@ const App = () => {
               cartLength={cartLength}
               getCartItems={getCartItems}
               setOrderSummary={setOrderSummary}
+              numberWithCommas={numberWithCommas}
             />
             {footerElement}
           </>
@@ -174,6 +182,7 @@ const App = () => {
               getCartItems={getCartItems}
               info={info}
               setInfo={setInfo}
+              numberWithCommas={numberWithCommas}
             />
             {footerElement}
           </>
@@ -188,6 +197,7 @@ const App = () => {
               orderSummary={orderSummary}
               setOrderSummary={setOrderSummary}
               deleteCart={deleteCart}
+              numberWithCommas={numberWithCommas}
             />
             {footerElement}
           </>

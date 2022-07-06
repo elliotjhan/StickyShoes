@@ -18,17 +18,12 @@ const CheckoutForm = (props) => {
     });
   }, []);
 
-  const numberWithCommas = (number) => {
-    let newNumber = (parseFloat(number)).toFixed(2);
-    return newNumber.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',');
-  }
-
   const getCartTotal = () => {
     let cartTotal = null;
     props.cartData.forEach(element => {
       cartTotal += (parseFloat(element.price) * element.quantity); 
     });
-    return numberWithCommas(cartTotal);
+    return props.numberWithCommas(cartTotal);
   }
 
   const handleInput = (event) => {
@@ -54,68 +49,71 @@ const CheckoutForm = (props) => {
 
   if(props.cartData.length > 0) {
     return (
-      <div className="container mt-3 checkout">
-        <div className="row">
-          <div className="col col-sm-12">
-            <div className="display-5 checkoutTitle">Checkout</div>
-              Order Total: ${getCartTotal()}
+      <div className="checkoutContainer">
+        <div className="row justify-content-center">
+          <div className="col col-sm-5">
+            <div className="checkoutTitle">
+              Checkout
+            </div>
           </div>
         </div>
-        <br/>
-        <br/>
-        <div className="row">
-          <div className="col">
+        <div className="row justify-content-center">
+          <div className="col-5">
             Name <br/>
-            <input className="form-control" name="name" type="text" onChange={(e) => handleInput(e)}/>
+            <input className="checkoutInput" name="name" type="text" onChange={(e) => handleInput(e)}/>
           </div>
         </div> <br/>
-        <div className="row">
-          <div className="col">
+        <div className="row justify-content-center">
+          <div className="col-5">
             Credit Card <br/>
-            <input className="form-control" name="creditCard" type="number" onChange={(e) => handleInput(e)}/>
+            <input className="checkoutInput" name="creditCard" type="number" onChange={(e) => handleInput(e)}/>
           </div>
         </div> <br/>
-        <div className="row">
-          <div className="col">
+        <div className="row justify-content-center">
+          <div className="col-5">
             Address <br/>
-            <input className="form-control" name="address" type="text" onChange={(e) => handleInput(e)}/>
+            <input className="checkoutInput" name="address" type="text" onChange={(e) => handleInput(e)}/>
           </div>
         </div> <br/>
-        <div className="row">
-          <div className="col-6">
+        <div className="row justify-content-center">
+          <div className="col-3">
             City <br/>
-            <input className="form-control" name="city" type="text" onChange={(e) => handleInput(e)}/>
+            <input className="checkoutInput" name="city" type="text" onChange={(e) => handleInput(e)}/>
           </div>
-          <div className="col-2">
+          <div className="col-1">
             State <br/>
-            <input className="form-control" name="state" type="text" onChange={(e) => handleInput(e)}/>
+            <input className="checkoutInput" name="state" type="text" onChange={(e) => handleInput(e)}/>
           </div>
-          <div className="col-4">
+          <div className="col-1">
             Zipcode <br/>
-            <input className="form-control" name="zipcode" type="number" onChange={(e) => handleInput(e)}/>
+            <input className="checkoutInput" name="zipcode" type="number" onChange={(e) => handleInput(e)}/>
           </div>
         </div> 
-        <div className="row mt-5">
-          <div className="col text-right">
-            <button className="btn btn-primary" onClick={() => handleCheckout()}>Place Order</button>
+        <div className="row justify-content-center checkoutTotal">
+          <div className="col-5">
+            Order Total: ${getCartTotal()}
           </div>
         </div>
-        <div className="row">
-          <div className="col pt-4">
-            <Link to="/catalog">
-              <div className='text-secondary'>
-                &lt;Continue Shopping
-              </div>
+        <div className="row justify-content-center checkoutButtonContainer">
+          <div className="col-5 text-right">
+            <button className="checkoutButton" onClick={() => handleCheckout()}>Place Order</button>
+          </div>
+        </div>
+        <div className="row justify-content-center checkoutBottom">
+          <div className="col-5">
+            <Link style={{textDecoration: 'none', color: '#000000'}} to="/">
+              <span className="cursor keepShopping">
+                &lt;Keep Shopping
+              </span>
             </Link>
           </div>
         </div>
-  
         <Modal isOpen={modalIsOpen}>
             <ModalBody>
               Please Ensure All Fields Are Completed
             </ModalBody>
             <ModalFooter>
-              <Button onClick={() => setModalIsOpen(!setModalIsOpen)} color="primary">Return</Button>
+              <button className="returnButton" onClick={() => setModalIsOpen(!setModalIsOpen)} color="primary">Return</button>
             </ModalFooter>
         </Modal>
       </div>

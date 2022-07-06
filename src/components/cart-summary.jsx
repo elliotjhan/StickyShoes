@@ -4,17 +4,12 @@ import { Link } from 'react-router-dom';
 import './../styles/cart-summary.css';
 
 const CartSummary = (props) => {
-  const numberWithCommas = (number) => {
-    let newNumber = (parseFloat(number)).toFixed(2);
-    return newNumber.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',');
-  }
-
   const getCartTotal = () => {
     let cartTotal = 0;
     props.cartData.forEach(element => {
       cartTotal += parseFloat(element.price * element.quantity);
     });
-    return numberWithCommas(cartTotal);
+    return props.numberWithCommas(cartTotal);
   }
 
   const handleCheckout = () => { 
@@ -33,6 +28,7 @@ const CartSummary = (props) => {
           deleteFromCart={props.deleteFromCart}
           key={element.id}
           product={element} 
+          numberWithCommas={props.numberWithCommas}
         />
       ) 
     });
@@ -61,11 +57,21 @@ const CartSummary = (props) => {
     );
   } else {
     return (
-      <div className="container cartContainer">
-        <Link to={'/'}>
-          <span className="cursor row keepShopping">&lt;Keep Shopping</span><br/>  
-        </Link>
-        <div className="row display-4">Cart Is Empty</div>
+      <div className="cartContainerEmpty">
+        <div className="row cartSummary">
+          <div className="col-1"></div>
+          <div className="col-11">
+            Cart Is Empty
+          </div>
+        </div>
+        <div className="row">
+          <div className="col-1"></div>
+          <div className="col-11">
+            <Link style={{textDecoration: 'none', color: 'black'}} to={'/'}>
+              <span className="keepShopping">&lt;Keep Shopping</span>  
+            </Link>
+          </div>
+        </div>
       </div>
     );
   }

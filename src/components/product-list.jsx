@@ -14,6 +14,7 @@ const ProductList = (props) => {
         key={element.productid} 
         setCurrentProduct={props.setCurrentProduct} 
         product={element}
+        numberWithCommas={props.numberWithCommas}
       />
     );
   });

@@ -1,3 +1,54 @@
-.checkout {
-  width: 40vw!important;
+.checkoutContainer {
+  height: 83vh;
+}
+.returnButton, .checkoutButton {
+  -webkit-appearance: none;
+  margin: 0;
+  border: none;
+  overflow: visible;
+  font: inherit;
+  color: #fff;
+  text-transform: none;
+  display: inline-block;
+  box-sizing: border-box;
+  padding: 0 22px;
+  background: #1f1d1d;
+  vertical-align: middle;
+  line-height: 25px;
+  min-height: 40px;
+  font-size: 14px;
+  text-decoration: none;
+  text-align: center;
+}
+.returnButton:hover, .checkoutButton:hover {
+  color: #e8e8e8;
+}
+.checkoutButtonContainer {
+  padding-top: 2vh;
+  padding-bottom: 2vh;
+}
+.checkoutTitle {
+  font-size: 2.5vw;
+  padding-top: 8.2vh;
+  padding-bottom: 3vh;
+}
+.checkoutInput {
+  width: 100%;
+  border: 1px solid rgb(0, 0, 0);
+  padding: 10px;
+  font-size: .8vw;
+}
+.checkoutInput:focus {
+  border: 1px solid rgb(114, 114, 114);
+  outline: none !important;
+}
+.checkoutTotal {
+  font-size: 1.2vw;
+  padding-top: 5vh;
+}
+.keepShopping {
+  padding-bottom: 10vh;
+}
+.checkoutBottom {
+  padding-bottom: 8vh;
 }

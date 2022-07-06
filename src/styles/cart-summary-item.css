@@ -1,12 +1,12 @@
 .cartProductName {
-  font-size: 1.4vw;
+  font-size: 1.8vw;
   padding-bottom: 10px;
 }
 .productItem {
-  height: 23vh;
+  height: 33vh;
 }
 .cartProductPrice {
-  font-size: 1vw;
+  font-size: 1.2vw;
   padding-bottom: 10px;
 }
 .updateButton {

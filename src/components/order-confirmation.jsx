@@ -6,11 +6,6 @@ const OrderConfirmation = (props) => {
   const [confirmationInfo, setConfirmationInfo] = useState({});
   const [confirmationNumber, setConfirmationNumber] = useState(0);
 
-  const numberWithCommas = (number) => {
-    let newNumber = (parseFloat(number)).toFixed(2);
-    return newNumber.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',');
-  }
-
   useEffect(() => {
     setConfirmationNumber(Math.floor(Math.random() * 100000));
     setConfirmationInfo(props.info);
@@ -45,7 +40,7 @@ const OrderConfirmation = (props) => {
           <div className="col-3" style={style}></div>
           <div className="col-3 my-auto">
             {element.name} <br/>
-            ${numberWithCommas(element.price)} <br/>
+            ${props.numberWithCommas(element.price)} <br/>
             Quantity: {element.quantity}
           </div>
         </div>
@@ -60,7 +55,7 @@ const OrderConfirmation = (props) => {
     orderSummary.forEach(element => {
       total += parseInt(element.quantity) * parseInt(element.price);
     });
-    return numberWithCommas(total);
+    return props.numberWithCommas(total);
   }
 
   const getOrderSummaryLength = () => {
@@ -74,43 +69,43 @@ const OrderConfirmation = (props) => {
 
   if(confirmationInfo.name) {
     return (
-      <div className="container text-center orderSummaryContainer">
-        <div className="row mt-5">
-          <div className="col display-5">
+      <div className="orderSummaryContainer">
+        <div className="row justify-content-center orderConfirmationTitle">
+          <div className="col-6">
             Order Summary For {confirmationInfo.name}
           </div>
         </div>
         <br/>
-        <div className="row">
-          <div className="col orderSummaryItemTotal">Confirmation#: {confirmationNumber}</div>
+        <div className="row justify-content-center">
+          <div className="col-6 orderSummaryItemTotal">Confirmation#: {confirmationNumber}</div>
         </div>
-        <div className="row">
-          <div className="col orderSummaryItemTotal">
+        <div className="row justify-content-center">
+          <div className="col-6 orderSummaryItemTotal">
             {getOrderSummaryLength()} Item(s)
           </div>
         </div>
-        <div className="row">
-          <div className="col orderSummaryItemTotal">
+        <div className="row justify-content-center">
+          <div className="col-6 orderSummaryItemTotal">
             Order Total: ${getOrderTotal()}
           </div>
         </div>
-        <div className="row">
-          <div className="col orderSummaryItemTotal">
+        <div className="row justify-content-center">
+          <div className="col-6 orderSummaryItemTotal">
             Shipped To: {confirmationInfo.address} {confirmationInfo.city}, {confirmationInfo.state} {confirmationInfo.zipcode}
           </div>
         </div>
-        <div className="row">
-          <div className="col">
+        <div className="row justify-content-center">
+          <div className="col-6">
             *Please note that this was not a real purchase* <br/>
             *Thank you for demoing Sticky Shoes*
           </div>
         </div>
         {renderOrderSummaryItems()}
         <br/>
-        <div className="row">
-          <div className="col">
+        <div className="row justify-content-center">
+          <div className="col-6">
             <Link to="/">
-              <button onClick={() => handleBackToCatalog()} className="btn btn-primary">Home</button>
+              <button onClick={() => handleBackToCatalog()} className="homeButton">Home</button>
             </Link>
           </div>
         </div>
@@ -119,16 +114,16 @@ const OrderConfirmation = (props) => {
     );
   } else {
     return (
-      <div className="container text-center orderSummaryContainer">
-        <div className="row my-5">
-          <div className="col display-5">
+      <div className="orderSummaryContainerEmpty">
+        <div className="row orderConfirmationTitleEmpty">
+          <div className="col">
             Go back to Home Page
           </div>
         </div>
         <div className="row">
           <div className="col">
-            <Link to="/">
-              <button className="btn btn-primary">Home</button>
+            <Link style={{textDecoration: 'none'}}to="/">
+              <button className="homeButton">Home</button>
             </Link>
           </div>
         </div>
