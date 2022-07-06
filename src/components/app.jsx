@@ -35,7 +35,11 @@ const App = () => {
   }
 
   const getProducts = () => {
-    fetch('/api/products')
+    fetch('http://localhost:3003/products', {
+      headers:{
+        "accepts":"application/json"
+    }
+    })
       .then(response => {
         return response.json();
       })
@@ -48,7 +52,7 @@ const App = () => {
   }
 
   const getCartItems = () => {
-    fetch('/api/cart')
+    fetch('http://localhost:3003/cart')
       .then(response => {
         return response.json();
       })
@@ -70,7 +74,7 @@ const App = () => {
   }
 
   const addToCart = (productid, quantity, price) => {
-    fetch('/api/addtocart', {
+    fetch('http://localhost:3003/addtocart', {
       method: 'POST',
       body: JSON.stringify({
         productid,
@@ -90,7 +94,7 @@ const App = () => {
   }
 
   const updateCart = (quantity, productid) => {
-    fetch('/api/updatecart', {
+    fetch('http://localhost:3003/updatecart', {
       method: 'PUT',
       body: JSON.stringify({
         quantity,
@@ -109,7 +113,7 @@ const App = () => {
   }
 
   const deleteCart = (cartId) => {
-    fetch('/api/deletecart', {
+    fetch('http://localhost:3003/deletecart', {
       method: 'DELETE',
       body: JSON.stringify({
         cartId: parseInt(cartId)
