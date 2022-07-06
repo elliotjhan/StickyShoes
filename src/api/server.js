@@ -8,17 +8,15 @@ const functions = require("./functions");
 const connection = require("./connection");
 const { createProxyMiddleware } = require("http-proxy-middleware");
 
-// app.use(
-//   "/api",
-//   createProxyMiddleware({
-//     target: "127.0.0.1:3003",
-//     changeOrigin: true,
-//     pathRewrite: {
-//       "^/api": "/",
-//     },
-//   })
-// );
+const middleware = createProxyMiddleware({
+  target: "http://localhost:3003",
+  changeOrigin: true,
+  pathRewrite: {
+    "^/api": "/",
+  },
+});
 
+app.use(middleware);
 app.use(bodyParser.json());
 app.use(cors());
 app.options("*", cors());
@@ -51,7 +49,7 @@ async function getProducts() {
   return now;
 }
 
-app.get("/products", (req, res, next) => {
+app.get("/products", (req, res) => {
   if (!req.session.cartid) {
     let newid = Math.floor(Math.random() * 1000000);
     req.session.cartid = newid;

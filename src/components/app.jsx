@@ -35,11 +35,7 @@ const App = () => {
   }
 
   const getProducts = () => {
-    fetch('http://localhost:3003/products', {
-      headers:{
-        "accepts":"application/json"
-    }
-    })
+    fetch('/api/products')
       .then(response => {
         return response.json();
       })
@@ -52,7 +48,7 @@ const App = () => {
   }
 
   const getCartItems = () => {
-    fetch('http://localhost:3003/cart')
+    fetch('/api/cart')
       .then(response => {
         return response.json();
       })
@@ -74,7 +70,7 @@ const App = () => {
   }
 
   const addToCart = (productid, quantity, price) => {
-    fetch('http://localhost:3003/addtocart', {
+    fetch('/api/addtocart', {
       method: 'POST',
       body: JSON.stringify({
         productid,
@@ -94,7 +90,7 @@ const App = () => {
   }
 
   const updateCart = (quantity, productid) => {
-    fetch('http://localhost:3003/updatecart', {
+    fetch('/api/updatecart', {
       method: 'PUT',
       body: JSON.stringify({
         quantity,
@@ -113,7 +109,7 @@ const App = () => {
   }
 
   const deleteCart = (cartId) => {
-    fetch('http://localhost:3003/deletecart', {
+    fetch('/api/deletecart', {
       method: 'DELETE',
       body: JSON.stringify({
         cartId: parseInt(cartId)
@@ -135,8 +131,6 @@ const App = () => {
   return(
     <div className="container-fluid main">
       <Routes>
-        {/* <Route path='/' element={<LandingPage />}>
-        </Route> */}
         <Route path='/' element={
           <>
             {headerElement}
