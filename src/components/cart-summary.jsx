@@ -38,35 +38,32 @@ const CartSummary = (props) => {
     });
 
     return (
-      <div className="container cartContainer">
-        <Link  style={{textDecoration: 'none', color: 'black'}} to={'/'}>
-          <span className="cursor row">&lt;Keep Shopping</span>
-        </Link>
-        <div className="row">
-          <div className="col cartSummary">Cart Summary:</div>
+      <React.Fragment>
+        <div className="row justify-content-center cartSummary">
+          <div className="col-10">Cart</div>
         </div>
-        <div>
-          {cartItemArrayDisplay}
-        </div>
-        <div className="row align-items-center">
-          <div className="col cartSubtotal">Subtotal ({props.cartLength} items): ${getCartTotal()}</div>
-          <div className="col text-center">
-            <Link to={'/'}>
-              <button className="btn btn-info cartShoppingButton me-1">Keep Shopping</button>
+        {cartItemArrayDisplay}
+        <div className="row justify-content-start align-items-center cartFooter">
+          <div className="col-1"></div>
+          <div className="col-5 cartSubtotal">Subtotal ({props.cartLength} items): ${getCartTotal()}</div>
+          <div className="col-2">
+            <Link style={{textDecoration: 'none', color: 'black'}} to={'/'}>
+              <span className="cursor row keepShopping">&lt;Keep Shopping</span>
             </Link>
+          </div>
+          <div className="col-3 text-center">
             <Link to={'/checkout'}>
-              <button onClick={() => handleCheckout()} className="btn btn-primary cartCheckoutButton">Checkout</button>
+              <button onClick={() => handleCheckout()} className="cartCheckoutButton">Checkout</button>
             </Link>
           </div>
         </div>
-        <br/>
-      </div>
+      </React.Fragment>
     );
   } else {
     return (
       <div className="container cartContainer">
         <Link to={'/'}>
-          <div className="cursor row text-secondary">&lt;Keep Shopping</div><br/>  
+          <span className="cursor row keepShopping">&lt;Keep Shopping</span><br/>  
         </Link>
         <div className="row display-4">Cart Is Empty</div>
       </div>
