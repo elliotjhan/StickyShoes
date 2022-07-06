@@ -39,8 +39,8 @@ const CartSummary = (props) => {
 
     return (
       <div className="container cartContainer">
-        <Link to={'/'}>
-          <div className="cursor row text-secondary pt-2 ps-2">&lt;Keep Shopping</div><br/>
+        <Link  style={{textDecoration: 'none', color: 'black'}} to={'/'}>
+          <span className="cursor row">&lt;Keep Shopping</span>
         </Link>
         <div className="row">
           <div className="col cartSummary">Cart Summary:</div>

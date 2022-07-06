@@ -48,13 +48,18 @@ const ProductDetails = (props) => {
   }
 
   const decrement = () => {
-    setQuantity(quantity - 1);
+    if (quantity < 2) {
+      setQuantity(1);
+    } else {
+      setQuantity(quantity - 1);
+    }
   }
 
   const renderProductImageCarousel = () => {
     let imageArray = product.carousel;
     if(product.carousel) {
       let carousel = imageArray.map(element => {
+        //let url = require(`./../assets/images/${element}`);
         let url = require(`./../assets/images/${element}`);
         return (
           <div key={imageArray.indexOf(element)}>
@@ -69,23 +74,13 @@ const ProductDetails = (props) => {
   if (product) {
     return (
       <React.Fragment>
-      <div className="row">
-        <div className="col">
-          <Link style={{textDecoration: 'none', color: 'black'}} to="/">
-              <span className="cursor">
-                &lt;Keep Shopping
-              </span>
-          </Link>
-        </div>
-      </div>
-      <div className="row align-items-center justify-content-center">
+      <div className="row align-items-center justify-content-center productDetailsContainer">
         <div className="col-6">
           <Carousel
-            showThumbs={false}
+            showThumbs={false}s
             showStatus={false}
             autoPlay={true}
             width="30vw"
-            margin='auto'
             interval={2500}
             infiniteLoop={true}
             stopOnHover={true}>
@@ -93,23 +88,31 @@ const ProductDetails = (props) => {
           </Carousel>
         </div>
         <div className="col-6">
-          <div className="display-3 productDetailsName">{product.name}</div><br/>
-          <h3 className="font-weight-bold">${numberWithCommas(product.price)}</h3><br/>
-          <div className="font-italic">{product.description}</div><br/>
-          <Quantity 
-            increment={increment}
-            decrement={decrement}
-            quantity={quantity}
-          />
-          <Link to="/">
-            <button className="btn btn-info mr-3">Keep Shopping</button>
-          </Link>
-          <button className="btn btn-primary" onClick={() => addToCart()}>Add To Cart</button>
+          <div className="productDetailsName">{product.name}</div><br/>
+          <div className="productDetailsPrice">${numberWithCommas(product.price)}</div><br/>
+          <div className="productDetailsDescription">{product.description}</div><br/>
+          <div className="row align-items-center text-start">
+            <div className="col-2">
+              <Quantity 
+                increment={increment}
+                decrement={decrement}
+                quantity={quantity}
+              />
+            </div>
+            <div className="col-3">
+              <button className="cartButton" onClick={() => addToCart()}>Add To Cart</button>
+            </div>
+          </div>
+          <div className="row keepShoppingContainer">
+            <div className="col">
+              <Link style={{textDecoration: 'none', color: '#000000'}} to="/">
+                <span className="cursor keepShopping">
+                  &lt;Keep Shopping
+                </span>
+              </Link>
+            </div>
+          </div>
         </div>
-      </div>
-      <div className="row">
-        <div className="col">{product.description}</div>
-      </div>
         <Modal isOpen={modalIsOpen}>
           <ModalHeader>
             Product has been added to cart!
@@ -123,7 +126,7 @@ const ProductDetails = (props) => {
             </Link>
           </ModalFooter>
         </Modal>
-      
+      </div>
       </React.Fragment>
     );
   } 

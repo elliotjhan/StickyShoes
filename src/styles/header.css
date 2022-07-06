@@ -15,7 +15,13 @@
   font-size: 3vh;
   font-weight: 400;
 }
+.headerTitle:hover {
+  color: #545454;
+}
 .cartLength {
   color: rgb(0, 0, 0);
   font-size: 1.2rem;
+}
+.cartLength:hover {
+  color:#545454
 }
