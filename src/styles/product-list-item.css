@@ -1,22 +1,18 @@
-@import url('https://fonts.googleapis.com/css?family=Roboto+Condensed&display=swap');
-
 .catalogItem {
-  background-color: #f1f1f1;
-  border: 5px solid rgb(26, 26, 26);
-  border-radius: 7px;
+  border: 1px solid transparent;
+}
+.catalogItem:hover {
+  border: 1px #bdbdbd solid;
 }
 .productImage {
-  height: 41vh;
-  background-color: #f1f1f1;
+  height: 35vh;
 }
 .productInfo {
   background-color: white;
 }
 .productName {
-  font-family: 'Roboto Condensed', sans-serif;
-  font-size: 1.9rem;
+  font-size: 1.3vw;
 }
 .moreInfoButton {
-  font-family: 'Roboto Condensed', sans-serif;
-  width: 17vw;
+  width: 60%;
 }

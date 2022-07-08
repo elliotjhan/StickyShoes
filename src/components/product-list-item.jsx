@@ -6,15 +6,10 @@ const ProductListItem  = (props) => {
   const setViewCallback = () => {
     props.setCurrentProduct(props.product);
   }
-
-  const numberWithCommas = (number) => {
-    let newNumber = (parseFloat(number)).toFixed(2);
-    return newNumber.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',');
-  }
   let product = props.product;
   let imageName = product.image; 
   // returns an array of images, 0 index because we want the main page to only show one picture
-  const background = require(`./../assets/images/${imageName}`); // require canot take only variable due to webpack
+  const background = require(`./../assets/images/${imageName}`); // require cannot take variable due to webpack
   const style = {
     backgroundImage: `url(${background})`,
     backgroundPosition: 'center',
@@ -23,19 +18,20 @@ const ProductListItem  = (props) => {
   };
 
   return (
-    <div className="col-lg-3 col-sm-12 px-0 catalogItem text-center">
-      <div className="text-center card">
-        <div className="productImage card-img-top" style={style}>
+    <div className="col-lg-3 m-5 col-sm-12 catalogItem p-0 text-center">
+      <Link style={{textDecoration: 'none', color: 'black'}} to={'/details'}>
+        <div onClick={() => setViewCallback()} className="text-center card border-0">
+          <div className="productImage card-img-top" style={style}>
+          </div>
+          <div className="productInfo card-body">
+            <div className="font-weight-bold productName">{product.name}</div>
+            <div className="productPrice">${props.numberWithCommas(product.price)}</div>
+              {/* <button className="btn btn-info mt-3 moreInfoButton" onClick={() => setViewCallback()}>More Info</button> */}
+          </div>
         </div>
-        <div className="productInfo card-body">
-          <div className="font-weight-bold productName">{product.name}</div>
-          <div className="productPrice">${numberWithCommas(product.price)}</div>
-          <Link to={'/catalog/details'}>
-            <button className="btn btn-info mt-3 moreInfoButton" onClick={() => setViewCallback()}>More Info</button>
-          </Link>
-        </div>
-      </div>
+      </Link>
     </div>
+
   );
 }
 

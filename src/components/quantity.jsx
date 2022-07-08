@@ -3,7 +3,7 @@ import './../styles/quantity.css';
 
 const Quantity = (props) => {
   return (
-    <div className="quantity-input mb-3">
+    <div className="quantity-input">
       <button className="quantity-input__modifier quantity-input__modifier--left" onClick={() => props.decrement()}>
         &mdash;
       </button>

@@ -4,9 +4,10 @@ import ProductList from './product-list';
 import ProductDetails from './product-details';
 import CartSummary from './cart-summary';
 import CheckoutForm from './checkout-form';
-import LandingPage from './landing-page';
+import Footer from './footer';
 import OrderConfirmation from './order-confirmation';
 import { Routes, Route } from "react-router-dom";
+import './../styles/app.css';
 
 const App = () => {
   const [products, setProducts] = useState([]);
@@ -28,8 +29,13 @@ const App = () => {
     getCartItems();
   }, []);
 
+  const numberWithCommas = (number) => {
+    let newNumber = (parseFloat(number)).toFixed(2);
+    return newNumber.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',');
+  }
+
   const getProducts = () => {
-    fetch('/api/products')
+    fetch('/products')
       .then(response => {
         return response.json();
       })
@@ -42,7 +48,7 @@ const App = () => {
   }
 
   const getCartItems = () => {
-    fetch('/api/cart')
+    fetch('/cart')
       .then(response => {
         return response.json();
       })
@@ -64,7 +70,7 @@ const App = () => {
   }
 
   const addToCart = (productid, quantity, price) => {
-    fetch('/api/addtocart', {
+    fetch('/addtocart', {
       method: 'POST',
       body: JSON.stringify({
         productid,
@@ -84,7 +90,7 @@ const App = () => {
   }
 
   const updateCart = (quantity, productid) => {
-    fetch('/api/updatecart', {
+    fetch('/updatecart', {
       method: 'PUT',
       body: JSON.stringify({
         quantity,
@@ -103,7 +109,7 @@ const App = () => {
   }
 
   const deleteCart = (cartId) => {
-    fetch('/api/deletecart', {
+    fetch('/deletecart', {
       method: 'DELETE',
       body: JSON.stringify({
         cartId: parseInt(cartId)
@@ -121,71 +127,82 @@ const App = () => {
   }
 
   let headerElement = <Header cartLength={cartLength}/>
+  let footerElement = <Footer />
   return(
-    <Routes>
-      <Route path='/' element={<LandingPage />}>
-      </Route>
-      <Route path='/catalog' element={
-        <>
-          {headerElement}
-          <ProductList 
-            productList={products}
-            setCurrentProduct={setCurrentProduct}
-          />
-        </>
-      }>
-      </Route>
-      <Route path='/catalog/details' element={
-        <>
-          {headerElement}
-          <ProductDetails 
-            getCartItems={getCartItems}
-            addToCart={addToCart}
-            currentProduct={currentProduct}
-            productList={products}
-          />
-        </>
-      }>
-      </Route>
-      <Route path='/cart' element={
-        <>
-          {headerElement}
-          <CartSummary
-            updateCart={updateCart}
-            cartData={cartData}
-            cartLength={cartLength}
-            getCartItems={getCartItems}
-            setOrderSummary={setOrderSummary}
-          />
-        </>
-      }>
-      </Route>
-      <Route path='/checkout' element={
-        <>
-          {headerElement}
-          <CheckoutForm
-            cartData={cartData}
-            getCartItems={getCartItems}
-            info={info}
-            setInfo={setInfo}
-          />
-        </>
-      }>
-      </Route>
-      <Route path='/confirmation' element={
-        <>
-          {headerElement}
-          <OrderConfirmation
-            setInfo={setInfo}
-            info={info}
-            orderSummary={orderSummary}
-            setOrderSummary={setOrderSummary}
-            deleteCart={deleteCart}
-          />
-        </>
-      }>
-      </Route>
-    </Routes>
+    <div className="container-fluid main">
+      <Routes>
+        <Route path='/' element={
+          <>
+            {headerElement}
+            <ProductList 
+              productList={products}
+              setCurrentProduct={setCurrentProduct}
+              numberWithCommas={numberWithCommas}
+            />
+            {footerElement}
+          </>
+        }>
+        </Route>
+        <Route path='/details' element={
+          <>
+            {headerElement}
+            <ProductDetails 
+              getCartItems={getCartItems}
+              addToCart={addToCart}
+              currentProduct={currentProduct}
+              productList={products}
+              numberWithCommas={numberWithCommas}
+            />
+            {footerElement}
+          </>
+        }>
+        </Route>
+        <Route path='/cart' element={
+          <>
+            {headerElement}
+            <CartSummary
+              updateCart={updateCart}
+              cartData={cartData}
+              cartLength={cartLength}
+              getCartItems={getCartItems}
+              setOrderSummary={setOrderSummary}
+              numberWithCommas={numberWithCommas}
+            />
+            {footerElement}
+          </>
+        }>
+        </Route>
+        <Route path='/checkout' element={
+          <>
+            {headerElement}
+            <CheckoutForm
+              cartData={cartData}
+              getCartItems={getCartItems}
+              info={info}
+              setInfo={setInfo}
+              numberWithCommas={numberWithCommas}
+            />
+            {footerElement}
+          </>
+        }>
+        </Route>
+        <Route path='/confirmation' element={
+          <>
+            {headerElement}
+            <OrderConfirmation
+              setInfo={setInfo}
+              info={info}
+              orderSummary={orderSummary}
+              setOrderSummary={setOrderSummary}
+              deleteCart={deleteCart}
+              numberWithCommas={numberWithCommas}
+            />
+            {footerElement}
+          </>
+        }>
+        </Route>
+      </Routes>
+    </div>
   )
 }
 
