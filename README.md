@@ -2,7 +2,7 @@
 
 ## Live Demo: [Link](https://stickyshoes.elliotjhan.com)
 
-![Image](stickyshoesdemo.gif)
+![Image](demo.gif)
 
 Here you will see a shopping center for the hottest rock climbing shoes today.
 You may view pictures of chosen shoe, read the description, and add them to your cart for purchase.
