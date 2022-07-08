@@ -6,18 +6,7 @@ const bodyParser = require("body-parser");
 const { Pool } = require("pg");
 const functions = require("./functions");
 const connection = require("./connection");
-// const { createProxyMiddleware } = require("http-proxy-middleware");
 
-// app.use(
-//   "/api",
-//   createProxyMiddleware({
-//     target: "http://localhost:3003",
-//     changeOrigin: true,
-//     pathRewrite: {
-//       "^/api": "/",
-//     },
-//   })
-// );
 app.use(bodyParser.json());
 app.use(cors());
 app.options("*", cors());
