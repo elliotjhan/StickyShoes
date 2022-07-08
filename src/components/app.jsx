@@ -35,7 +35,7 @@ const App = () => {
   }
 
   const getProducts = () => {
-    fetch('/api/products')
+    fetch('/products')
       .then(response => {
         return response.json();
       })
@@ -48,7 +48,7 @@ const App = () => {
   }
 
   const getCartItems = () => {
-    fetch('/api/cart')
+    fetch('/cart')
       .then(response => {
         return response.json();
       })
@@ -70,7 +70,7 @@ const App = () => {
   }
 
   const addToCart = (productid, quantity, price) => {
-    fetch('/api/addtocart', {
+    fetch('/addtocart', {
       method: 'POST',
       body: JSON.stringify({
         productid,
@@ -90,7 +90,7 @@ const App = () => {
   }
 
   const updateCart = (quantity, productid) => {
-    fetch('/api/updatecart', {
+    fetch('/updatecart', {
       method: 'PUT',
       body: JSON.stringify({
         quantity,
@@ -109,7 +109,7 @@ const App = () => {
   }
 
   const deleteCart = (cartId) => {
-    fetch('/api/deletecart', {
+    fetch('/deletecart', {
       method: 'DELETE',
       body: JSON.stringify({
         cartId: parseInt(cartId)
@@ -131,8 +131,6 @@ const App = () => {
   return(
     <div className="container-fluid main">
       <Routes>
-        {/* <Route path='/' element={<LandingPage />}>
-        </Route> */}
         <Route path='/' element={
           <>
             {headerElement}

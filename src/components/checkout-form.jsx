@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Button, Modal, ModalBody, ModalFooter } from 'reactstrap';
+import { Modal, ModalBody, ModalFooter } from 'reactstrap';
 import { Link, useNavigate } from 'react-router-dom'; 
 import './../styles/checkout-form.css';
 
@@ -109,12 +109,12 @@ const CheckoutForm = (props) => {
           </div>
         </div>
         <Modal isOpen={modalIsOpen}>
-            <ModalBody>
-              Please Ensure All Fields Are Completed
-            </ModalBody>
-            <ModalFooter>
-              <button className="returnButton" onClick={() => setModalIsOpen(!setModalIsOpen)} color="primary">Return</button>
-            </ModalFooter>
+          <ModalBody>
+            Please Ensure All Fields Are Completed
+          </ModalBody>
+          <ModalFooter>
+            <button className="returnButton" onClick={() => setModalIsOpen(!setModalIsOpen)} color="primary">Return</button>
+          </ModalFooter>
         </Modal>
       </div>
     );
