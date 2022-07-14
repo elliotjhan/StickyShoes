@@ -21,7 +21,7 @@ const Header = (props) => {
         </div>
         <div className="col-1 text-center">
           <Link style={{textDecoration: 'none'}} to={'/cart'}>
-            <div className="cartLength">
+            <div data-testid="cartLength" className="cartLength">
               Cart ({props.cartLength})
             </div>
           </Link>
