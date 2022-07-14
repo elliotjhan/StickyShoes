@@ -1,0 +1,18 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[` on initial render 1`] = `
+<div
+  className="row justify-content-around align-items-center footerContainer"
+  data-testid="footer"
+>
+  <div
+    className="col text-center"
+  >
+    <div>
+      ©
+      2022
+       | stickyshoes.elliotjhan.com | All Rights Reserved
+    </div>
+  </div>
+</div>
+`;

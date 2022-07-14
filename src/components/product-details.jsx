@@ -52,78 +52,72 @@ const ProductDetails = (props) => {
 
   const renderProductImageCarousel = () => {
     let imageArray = product.carousel;
-    if(product.carousel) {
-      let carousel = imageArray.map(element => {
-        let url = require(`./../assets/images/${element}`);
-        return (
-          <div key={imageArray.indexOf(element)}>
-            <img className="carouselImage" src={url}/>
-          </div>
-        );
-      });
-      return carousel;
-    }
+    let carousel = imageArray.map(element => {
+      let url = require(`./../assets/images/${element}`);
+      return (
+        <div key={imageArray.indexOf(element)}>
+          <img className="carouselImage" src={url}/>
+        </div>
+      );
+    });
+    return carousel;
   }
 
-  if (product) {
-    return (
-      <React.Fragment>
-      <div className="row align-items-center justify-content-center productDetailsContainer">
-        <div className="col-6">
-          <Carousel
-            showThumbs={false}s
-            showStatus={false}
-            autoPlay={true}
-            width="30vw"
-            interval={2500}
-            infiniteLoop={true}
-            stopOnHover={true}>
-            {renderProductImageCarousel()}
-          </Carousel>
-        </div>
-        <div className="col-6">
-          <div className="productDetailsName">{product.name}</div><br/>
-          <div className="productDetailsPrice">${props.numberWithCommas(product.price)}</div><br/>
-          <div className="productDetailsDescription">{product.description}</div><br/>
-          <div className="row align-items-center text-start">
-            <div className="col-2">
-              <Quantity 
-                increment={increment}
-                decrement={decrement}
-                quantity={quantity}
-              />
-            </div>
-            <div className="col-3">
-              <button className="cartButton" onClick={() => addToCart()}>Add To Cart</button>
-            </div>
-          </div>
-          <div className="row keepShoppingContainer">
-            <div className="col">
-              <Link style={{textDecoration: 'none', color: '#000000'}} to="/">
-                <span className="cursor keepShopping">
-                  &lt;Keep Shopping
-                </span>
-              </Link>
-            </div>
-          </div>
-        </div>
-        <Modal isOpen={modalIsOpen}>
-          <ModalHeader>
-            Product has been added to cart
-          </ModalHeader>
-          <ModalFooter>
-            <Link style={{textDecoration: 'none', color: '#000000'}} to="/">
-              <span className="keepShopping" onClick={() => setModalIsOpen(!modalIsOpen)}>&lt;Keep Shopping</span>
-            </Link>
-            <Link to="/cart">
-              <button className="cartButton ms-3">Go To Cart</button>
-            </Link>
-          </ModalFooter>
-        </Modal>
+  return (
+    <div data-testid="productDetails" className="row align-items-center justify-content-center productDetailsContainer">
+      <div className="col-6">
+        <Carousel
+          showThumbs={false}
+          showStatus={false}
+          autoPlay={true}
+          width="30vw"
+          interval={2500}
+          infiniteLoop={true}
+          stopOnHover={true}>
+          {product ? renderProductImageCarousel() : null}
+        </Carousel>
       </div>
-      </React.Fragment>
-    );
-  } 
+      <div className="col-6">
+        <div className="productDetailsName">{product ? product.name : ''}</div><br/>
+        <div className="productDetailsPrice">${product ? props.numberWithCommas(product.price) : ''}</div><br/>
+        <div className="productDetailsDescription">{product ? product.description : ''}</div><br/>
+        <div className="row align-items-center text-start">
+          <div className="col-2">
+            <Quantity 
+              increment={increment}
+              decrement={decrement}
+              quantity={quantity}
+            />
+          </div>
+          <div className="col-3">
+            <button className="cartButton" onClick={() => addToCart()}>Add To Cart</button>
+          </div>
+        </div>
+        <div className="row keepShoppingContainer">
+          <div className="col">
+            <Link style={{textDecoration: 'none', color: '#000000'}} to="/">
+              <span className="cursor keepShopping">
+                &lt;Keep Shopping
+              </span>
+            </Link>
+          </div>
+        </div>
+      </div>
+      <Modal isOpen={modalIsOpen}>
+        <ModalHeader>
+          Product has been added to cart
+        </ModalHeader>
+        <ModalFooter>
+          <Link style={{textDecoration: 'none', color: '#000000'}} to="/">
+            <span className="keepShopping" onClick={() => setModalIsOpen(!modalIsOpen)}>&lt;Keep Shopping</span>
+          </Link>
+          <Link to="/cart">
+            <button className="cartButton ms-3">Go To Cart</button>
+          </Link>
+        </ModalFooter>
+      </Modal>
+    </div>
+  );
 }
 
 export default ProductDetails;

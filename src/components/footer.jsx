@@ -1,9 +1,9 @@
 import React from 'react';
 import './../styles/footer.css';
 
-const Footer = (props) => {
+const Footer = () => {
   return (
-    <div className="row justify-content-around align-items-center footerContainer">
+    <div data-testid="footer" className="row justify-content-around align-items-center footerContainer">
       <div className="col text-center">
         <div>
           &copy; 
