@@ -2,7 +2,11 @@ import React from "react";
 import ProductDetails from "./../components/product-details";
 import { render, screen, cleanup } from "@testing-library/react";
 import { MemoryRouter } from "react-router-dom";
-import { create, act } from "react-test-renderer";
+import { create } from "react-test-renderer";
+
+afterEach(() => {
+  cleanup();
+})
 
 const numberWithCommas = (number) => {
   let newNumber = (parseFloat(number)).toFixed(2);
