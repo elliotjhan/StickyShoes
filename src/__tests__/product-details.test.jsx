@@ -15,17 +15,17 @@ const numberWithCommas = (number) => {
 
 test("Product details should have 3 pictures, name, price, and description", () => {
   const currentProduct = {
-      image: 'shaman1.jpeg',
-      name: 'Evolv Shaman',
-      price: 165,
-      description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod.',
-      carousel: ['shaman1.jpeg', 'shaman2.jpeg', 'shaman3.jpeg'],
-      productid: 2
+    image: 'shaman1.jpeg',
+    name: 'Evolv Shaman',
+    price: 165,
+    description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod.',
+    carousel: ['shaman1.jpeg', 'shaman2.jpeg', 'shaman3.jpeg'],
+    productid: 2
   }
   render(
-    <ProductDetails 
-      numberWithCommas={numberWithCommas} 
-      currentProduct={currentProduct} 
+    <ProductDetails
+      numberWithCommas={numberWithCommas}
+      currentProduct={currentProduct}
       productList={[]}
     />, { wrapper: MemoryRouter }
   );
@@ -46,9 +46,9 @@ test('matches snapshot', () => {
   }
   let tree = create(
     <MemoryRouter>
-      <ProductDetails 
-        numberWithCommas={numberWithCommas} 
-        currentProduct={currentProduct} 
+      <ProductDetails
+        numberWithCommas={numberWithCommas}
+        currentProduct={currentProduct}
         productList={[]}
       />
     </MemoryRouter>
