@@ -25,7 +25,7 @@ const ProductList = (props) => {
         <div className="layer">
           <div className="bannerTextContainer">
             <div className="bannerTitleText">SPECIALIZED CLIMBING</div>
-            <div className="bannerText">Check out our specialized performance shoes that will help you send!</div>
+            <div className="bannerText">Check out our elite performance shoes that will help you send the most difficult of problems!</div>
           </div>
         </div>
       </div>

@@ -5,6 +5,6 @@ import { MemoryRouter } from "react-router-dom";
 import { create } from "react-test-renderer";
 import { jest } from '@jest/globals';
 
-test('api calls are made', () => {
+test('testing', () => {
 
 })

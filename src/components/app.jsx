@@ -81,7 +81,7 @@ const App = () => {
         'Content-Type': 'application/json'
       }
     })
-    .then((response) => {
+    .then(() => {
       getCartItems();
     })
     .catch(error => {
@@ -100,7 +100,7 @@ const App = () => {
         'Content-Type': 'application/json'
       }
     })
-    .then(response => {
+    .then(() => {
       getCartItems();
     })
     .catch(error => {
@@ -118,7 +118,7 @@ const App = () => {
         'Content-Type': 'application/json'
       }
     })
-    .then(response => {
+    .then(() => {
       getCartItems();
     })
     .catch(error => {
