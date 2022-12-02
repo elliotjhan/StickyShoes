@@ -81,12 +81,12 @@ const App = () => {
         'Content-Type': 'application/json'
       }
     })
-    .then(() => {
-      getCartItems();
-    })
-    .catch(error => {
-      console.error('Post Error: ', error);
-    });
+      .then(() => {
+        getCartItems();
+      })
+      .catch(error => {
+        console.error('Post Error: ', error);
+      });
   }
 
   const updateCart = (quantity, productid) => {
@@ -100,12 +100,12 @@ const App = () => {
         'Content-Type': 'application/json'
       }
     })
-    .then(() => {
-      getCartItems();
-    })
-    .catch(error => {
-      console.error('Post Error: ', error);
-    });
+      .then(() => {
+        getCartItems();
+      })
+      .catch(error => {
+        console.error('Post Error: ', error);
+      });
   }
 
   const deleteCart = (cartId) => {
@@ -118,23 +118,23 @@ const App = () => {
         'Content-Type': 'application/json'
       }
     })
-    .then(() => {
-      getCartItems();
-    })
-    .catch(error => {
-      console.error('Post Error: ', error);
-    });
+      .then(() => {
+        getCartItems();
+      })
+      .catch(error => {
+        console.error('Post Error: ', error);
+      });
   }
 
-  let headerElement = <Header cartLength={cartLength}/>
+  let headerElement = <Header cartLength={cartLength} />
   let footerElement = <Footer />
-  return(
+  return (
     <div className="container-fluid main">
       <Routes>
         <Route path='/' element={
           <>
             {headerElement}
-            <ProductList 
+            <ProductList
               productList={products}
               setCurrentProduct={setCurrentProduct}
               numberWithCommas={numberWithCommas}
@@ -146,7 +146,7 @@ const App = () => {
         <Route path='/details' element={
           <>
             {headerElement}
-            <ProductDetails 
+            <ProductDetails
               getCartItems={getCartItems}
               addToCart={addToCart}
               currentProduct={currentProduct}
